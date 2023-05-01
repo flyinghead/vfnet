@@ -1,0 +1,32 @@
+<html>
+<title th:text="#{msg.player.list.title}">VF4 Players</title>
+  <body>
+	<div align="center" class="playerlist">
+	    
+	  <h2 th:text="#{msg.player.list.title}">VF4 Players</h2>
+	  
+	  <table border="1" cellpadding="3">
+	    <thead>
+	      <tr>
+	        <th th:text="#{msg.player.game}">Game</th>
+	        <th th:text="#{msg.player.id}">ID</th>
+	        <th th:text="#{msg.player.name}">Name</th>
+	        <th th:text="#{msg.player.clan}">Clan</th>
+	        <th th:text="#{msg.player.character}">Character</th>
+	        <th th:text="#{msg.player.stats}">Stats</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr th:each="player : ${playerList}">
+	        <td th:text="${player.gameId == 2 ? 'FT' : player.gameId == 1 ? 'EVO' : 'VANILLA'}">EVO</td>
+	        <td th:text="${player.cardId}">1234</td>
+	        <td><a th:href="'player?id=' + ${player.cardId}" th:text="${#strings.isEmpty(player.ringName)} ? '(none)' : ${player.ringName}">Jane<a></a></td>
+	        <td th:text="${player.clanName}">Jane Clan</td>
+	        <td th:text="${player.characterName}">Character</td>
+	        <td th:text="'W/L: ' + ${player.wins} + '/' + ${player.losses} + ' Level: ' + ${player.level} + ' XP: ' + ${player.expPoints}">Level: 2 XP points: 203</td>
+	      </tr>
+	    </tbody>
+	  </table>
+	</div>
+  </body>
+</html>

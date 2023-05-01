@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>VF.NET 2023</title>
+	<link rel="stylesheet" type="text/css" media="all" href="../../css/default.css" th:href="@{/css/default.css}"/>
+</head>
+<body>
+    <div>
+	  <h2>
+	    <img src="../../images/flycast.png" alt="Flycast logo" title="Flycast logo" 
+           th:src="@{/images/flycast.png}" width="64" height="64"/>
+        Login
+      </h2>
+	  <form method="POST" action="upload-card" enctype="multipart/form-data">
+        <fieldset>
+		  <legend>Upload your VF4 card file to get started</legend>
+		  <span th:unless="${message == null}" class="fieldError" th:text="${message}">no error</span>
+		  <div>
+		  	<label for="card">Select your VF4 card</label>
+		  	<input type="file" name="card" />
+		  </div>
+		  <div class="submit">
+          	  <button type="submit" name="save">&nbsp;&nbsp;Let's goooo!&nbsp;&nbsp;</button>
+		  </div>
+		</fieldset>
+	  </form>
+	</div>
+</body>

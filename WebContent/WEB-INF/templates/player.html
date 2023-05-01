@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+ <title th:text="'VF4: ' + ${player.ringName}">VF4: </title>
+ <link rel="stylesheet" type="text/css" media="all" href="../../css/default.css" th:href="@{/css/default.css}"/>
+</head>
+<body>
+    <div>
+	  <h2>
+	  	<img src="../../images/flycast.png" alt="Flycast logo" title="Flycast logo" 
+           th:src="@{/images/flycast.png}" width="64" height="64"/>
+        Customize Player
+      </h2>
+      <form action="#" th:action="@{player}" th:object="${player}" method="post">
+        <input type="hidden" th:field="${player.id}" />
+        <input type="hidden" th:field="${player.cardId}" />
+        <fieldset>
+        	<legend>Player Data</legend>
+        	
+        	<ul th:if="${#fields.hasErrors('*')}" class="errorlist">
+	            <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
+          	</ul>
+          	<div>
+          	  <label for="cardId">ID:</label>
+          	  <span id="cardId" th:text="${player.cardId}">123</span>
+          	</div>
+          	<div>
+          	  <label for="character">Character:</label>
+          	  <span id="character" th:text="${player.characterName}">Goh</span>
+          	</div>
+          	<div>
+          	  <label for="ringName">Ring Name:</label>
+          	  <input type="text" th:field="*{ringName}" size="20" th:errorclass="fieldError" />
+          	</div>
+          	<div>
+          	  <label for="clanName">Clan Name:</label>
+          	  <input type="text" th:field="*{clanName}" size="20" th:errorclass="fieldError" />
+          	</div>
+          	<div>
+          	  <label for="color">Colors:</label>
+          	  <input type="text" th:field="*{color}" size="20" th:errorclass="fieldError" />
+          	</div>
+            <div>
+                <label for="emblem1">Emblems</label>
+                <input type="text" th:field="*{emblem1}" size="2" />
+                <input type="text" th:field="*{emblem2}" size="2" />
+            </div>
+            <div>
+	          	<span th:unless="${message == null}" th:text="${message}">changes saved</span>
+            </div>
+          	<div class="submit">
+          	  <button type="submit" name="save">&nbsp;&nbsp;Save&nbsp;&nbsp;</button>
+          	</div>
+        </fieldset>
+      </form>
+    </div> 
+</body>
+</html>
