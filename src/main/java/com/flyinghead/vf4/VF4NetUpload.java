@@ -144,6 +144,8 @@ public class VF4NetUpload extends BaseVf4Servlet
 					{
 						addEmblems(outParams, i, player);
 						addColor(outParams, i, player);
+						if (player.getEquip() != null)
+							outParams.put(QueryParams.playerQName(i, "equip"), player.getEquip());
 						if (gameType == Player.VF4_FT && player.getGameId() == Player.VF4_EVO)
 						{
 							// EVO cards are upgradable by FT
@@ -229,6 +231,8 @@ public class VF4NetUpload extends BaseVf4Servlet
 							outParams.put(QueryParams.playerQName(i, "clan_name"), player.getClanName());
 						addEmblems(outParams, i, player);
 						addColor(outParams, i, player);
+						if (player.getEquip() != null)
+							outParams.put(QueryParams.playerQName(i, "equip"), player.getEquip());
 					}
 					else
 					{

@@ -19,6 +19,10 @@ import com.flyinghead.vf4.db.Player;
 
 @Controller
 public class PlayerController {
+	private static final Pattern HEXADECIMAL_PATTERN = Pattern.compile("\\p{XDigit}+");
+	private static final Pattern VANILLA_COLOR = Pattern.compile("^\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d$", 0);
+	private static final Pattern EVO_COLOR = Pattern.compile("^\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d$", 0);
+	
 	@Autowired
     private IDbService dbService;
 
@@ -30,6 +34,7 @@ public class PlayerController {
 		if (player == null)
 			throw new RuntimeException("Player not found");
 		model.addAttribute("player", player);
+		model.addAttribute("matchList", dbService.listPlayerMatches(playerId));
 		
 	    return "player";
 	}
@@ -48,26 +53,37 @@ public class PlayerController {
 	    {
 		    if (persistedPlayer.getGameId() == Player.VF4_VANILLA) {
 		    	// 0,0,0,0,0,0,0,0
-		    	Pattern pattern = Pattern.compile("^\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d$", 0);
-		    	Matcher matcher = pattern.matcher(player.getColor());
+		    	Matcher matcher = VANILLA_COLOR.matcher(player.getColor());
 		    	if (!matcher.find())
 		    		bindingResult.addError(new FieldError("player", "color", player.getColor(), false, null, null, "Invalid colors: 8 numbers separated by comma"));
 		    }
 		    else {
 		    	// 0,0,0,0,0,0,0,0,0,0,0,0
-		    	Pattern pattern = Pattern.compile("^\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d$", 0);
-		    	Matcher matcher = pattern.matcher(player.getColor());
+		    	Matcher matcher = EVO_COLOR.matcher(player.getColor());
 		    	if (!matcher.find())
 		    		bindingResult.addError(new FieldError("player", "color", player.getColor(), false, null, null, "Invalid colors: 12 numbers separated by comma"));
 		    }
 	    }
-	    if (bindingResult.hasErrors())
-	        return "player";
+	    if (player.getEquip() != null && !player.getEquip().isEmpty()) {
+	    	if (player.getEquip().length() > 16
+	    			|| !HEXADECIMAL_PATTERN.matcher(player.getEquip()).matches())
+	    		bindingResult.addError(new FieldError("player", "equip", player.getEquip(), false, null, null, "Invalid equipment: max 16 hex digits"));
+	    	else if (player.getEquip().length() < 16)
+	    		player.setEquip("0000000000000000".substring(0, 16 - player.getEquip().length())
+	    				+ player.getEquip());
+	    }
 	    persistedPlayer.setRingName(player.getRingName());
 	    persistedPlayer.setClanName(player.getClanName());
 	    persistedPlayer.setColor(player.getColor());
 	    persistedPlayer.setEmblem1(player.getEmblem1());
 	    persistedPlayer.setEmblem2(player.getEmblem2());
+	    persistedPlayer.setEquip(player.getEquip());
+	    if (bindingResult.hasErrors()) {
+	    	player.setCharacter(persistedPlayer.getCharacter());
+		    model.addAttribute("player", player);
+			model.addAttribute("matchList", dbService.listPlayerMatches(player.getCardId()));
+	        return "player";
+	    }
 		String addr = req.getRemoteAddr();
 		if ("127.0.0.1".equals(addr) || "::1".equals(addr)) {
 			String forwardedIp = req.getHeader("X-Forwarded-For");
@@ -77,8 +93,8 @@ public class PlayerController {
 		persistedPlayer.setLastSeenIp(addr);
 		persistedPlayer.setLastSeen(new Timestamp(System.currentTimeMillis()));
 	    dbService.savePlayer(persistedPlayer);
-	    //model.clear();
+	    model.clear();
 	    model.addAttribute("message", "Changes saved");
-	    return "player";
+	    return "redirect:player?id=" + String.valueOf(player.getCardId());
 	}
 }

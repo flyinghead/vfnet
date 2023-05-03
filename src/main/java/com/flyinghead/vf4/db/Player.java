@@ -86,7 +86,10 @@ public class Player
 	@Column(name = "color")
 	String color;
 
-    @OneToMany(mappedBy="winner")
+	@Column(name = "equip")
+	String equip;
+
+	@OneToMany(mappedBy="winner")
     private List<Match> wonMatches = new ArrayList<Match>();
 
     @OneToMany(mappedBy="looser")
@@ -260,6 +263,14 @@ public class Player
 		this.character = character;
 	}
 	
+    public String getEquip() {
+		return equip;
+	}
+
+	public void setEquip(String equip) {
+		this.equip = equip;
+	}
+
 	public String getCharacterName() {
 		if (character == null)
 			return "(unknown)";

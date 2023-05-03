@@ -2,16 +2,18 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
- <title th:text="'VF4: ' + ${player.ringName}">VF4: </title>
+ <title th:text="'VF4: ' + (${player.ringName} ?: '(none)')">VF4: </title>
  <link rel="stylesheet" type="text/css" media="all" href="../../css/default.css" th:href="@{/css/default.css}"/>
 </head>
 <body>
     <div>
-	  <h2>
-	  	<img src="../../images/flycast.png" alt="Flycast logo" title="Flycast logo" 
-           th:src="@{/images/flycast.png}" width="64" height="64"/>
-        Customize Player
-      </h2>
+  	  <div class="logo">
+  	    <img src="../../images/flycast.png" alt="Flycast logo" title="Flycast logo" 
+          th:src="@{/images/flycast.png}" width="64" height="64" />
+	    <h2>
+          Customize Player
+        </h2>
+      </div>
       <form action="#" th:action="@{player}" th:object="${player}" method="post">
         <input type="hidden" th:field="${player.id}" />
         <input type="hidden" th:field="${player.cardId}" />
@@ -28,6 +30,13 @@
           	<div>
           	  <label for="character">Character:</label>
           	  <span id="character" th:text="${player.characterName}">Goh</span>
+          	</div>
+          	<div>
+          	  <label>Stats:</label>
+          	  Level: <span th:text="${player.level}">2</span>
+          	  XP Points: <span th:text="${player.expPoints}">204</span>
+          	  Wins: <span th:text="${player.wins}">2</span>
+          	  Losses: <span th:text="${player.losses}">2</span>
           	</div>
           	<div>
           	  <label for="ringName">Ring Name:</label>
@@ -47,7 +56,11 @@
                 <input type="text" th:field="*{emblem2}" size="2" />
             </div>
             <div>
-	          	<span th:unless="${message == null}" th:text="${message}">changes saved</span>
+                <label for="equip">Equipment</label>
+                <input type="text" th:field="*{equip}" size="16" />
+            </div>
+            <div th:unless="${param.message == null}">
+	          	<span th:text="${param.message}">changes saved</span>
             </div>
           	<div class="submit">
           	  <button type="submit" name="save">&nbsp;&nbsp;Save&nbsp;&nbsp;</button>
@@ -55,5 +68,39 @@
         </fieldset>
       </form>
     </div> 
+    <div class="matchList"  th:unless="${#lists.isEmpty(matchList)}">
+    	<h2>Match List</h2>
+    	
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Winner</th>
+            <th>Looser</th>
+            <th>Chain of Win</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="match : ${matchList}">
+            <td th:text="${match.endTime}">13/01/2011</td>
+            <td>
+            	<!-- a th:if="${match.winner.cardId != player.cardId}"
+            	   th:href="@{player-view(id=${match.winner.cardId})}">
+            	   <span th:text="${match.winner.ringName} ?: (none)">Joe</span></a>
+                <span th:if="${match.winner.cardId == player.cardId}" th:text="${match.winner.ringName} ?: (none)">Jack</span -->
+                <span th:text="${match.winner.ringName} ?: (none)">Jack</span>
+            </td>
+            <td>
+            	<!-- a th:if="${match.looser.cardId != player.cardId}"
+            	   th:href="@{player-view(id=${match.looser.cardId})}">
+            	   <span th:text="${match.looser.ringName} ?: (none)">Joe</span></a>
+                <span th:if="${match.looser.cardId == player.cardId}" th:text="${match.looser.ringName} ?: (none)">Jack</span -->
+                <span th:text="${match.looser.ringName} ?: (none)">Jack</span>
+            </td>
+            <td th:text="${match.chainOfWin}">2</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 </body>
 </html>

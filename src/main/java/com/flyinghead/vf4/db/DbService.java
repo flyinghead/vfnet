@@ -67,4 +67,13 @@ public class DbService implements IDbService
 		List<Match> list = session.createQuery("from Match order by endTime desc", Match.class).list();
 		return list;
 	}
+	
+	@Override
+	@Transactional
+	public List<Match> listPlayerMatches(int cardId) {
+		Session session = sessionFactory.getCurrentSession();
+		List<Match> list = session.createQuery("from Match m where m.winner.cardId=" + cardId + " or m.looser.cardId=" + cardId + " order by endTime desc", Match.class).list();
+		return list;
+	}
+
 }

@@ -8,4 +8,5 @@ public interface IDbService {
 	List<Player> listPlayers();
 	void saveMatch(Match match);
 	List<Match> listMatches();
+	List<Match> listPlayerMatches(int cardId);
 }
