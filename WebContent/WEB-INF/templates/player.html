@@ -46,6 +46,11 @@
           	  <label for="clanName">Clan Name:</label>
           	  <input type="text" th:field="*{clanName}" size="20" th:errorclass="fieldError" />
           	</div>
+          	<div th:unless="${player.gameId == 0}">
+          	  <label for="altMove1">Alternate Moves:</label>
+          	  A <input type="checkbox" th:field="*{altMove1}" th:errorclass="fieldError" />
+          	  B <input type="checkbox" th:field="*{altMove2}" th:errorclass="fieldError" />
+          	</div>
           	<div>
           	  <label for="color">Colors:</label>
           	  <input type="text" th:field="*{color}" size="20" th:errorclass="fieldError" />

@@ -88,6 +88,12 @@ public class Player
 
 	@Column(name = "equip")
 	String equip;
+	
+	@Column(name = "alt_move_1")
+	Boolean altMove1;
+	
+	@Column(name = "alt_move_2")
+	Boolean altMove2;
 
 	@OneToMany(mappedBy="winner")
     private List<Match> wonMatches = new ArrayList<Match>();
@@ -269,6 +275,22 @@ public class Player
 
 	public void setEquip(String equip) {
 		this.equip = equip;
+	}
+
+	public Boolean getAltMove1() {
+		return altMove1;
+	}
+
+	public void setAltMove1(Boolean altMove1) {
+		this.altMove1 = altMove1;
+	}
+
+	public Boolean getAltMove2() {
+		return altMove2;
+	}
+
+	public void setAltMove2(Boolean altMove2) {
+		this.altMove2 = altMove2;
 	}
 
 	public String getCharacterName() {

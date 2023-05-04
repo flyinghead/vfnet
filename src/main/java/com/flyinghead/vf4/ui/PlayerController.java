@@ -65,6 +65,7 @@ public class PlayerController {
 		    }
 	    }
 	    if (player.getEquip() != null && !player.getEquip().isEmpty()) {
+	    	// TODO vanilla format is different
 	    	if (player.getEquip().length() > 16
 	    			|| !HEXADECIMAL_PATTERN.matcher(player.getEquip()).matches())
 	    		bindingResult.addError(new FieldError("player", "equip", player.getEquip(), false, null, null, "Invalid equipment: max 16 hex digits"));
@@ -78,6 +79,8 @@ public class PlayerController {
 	    persistedPlayer.setEmblem1(player.getEmblem1());
 	    persistedPlayer.setEmblem2(player.getEmblem2());
 	    persistedPlayer.setEquip(player.getEquip());
+	    persistedPlayer.setAltMove1(player.getAltMove1());
+	    persistedPlayer.setAltMove2(player.getAltMove2());
 	    if (bindingResult.hasErrors()) {
 	    	player.setCharacter(persistedPlayer.getCharacter());
 		    model.addAttribute("player", player);

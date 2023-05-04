@@ -83,6 +83,15 @@ public class VF4NetUpload extends BaseVf4Servlet
 			params.put(QueryParams.playerQName(playerNum, "color"), player.getColor());
 	}
 	
+	private void addAltMoves(Map<String, String> params, int playerNum, Player player)
+	{
+		if (player.getAltMove1() != null || player.getAltMove2() != null)
+			params.put(QueryParams.playerQName(playerNum, "tec"), 
+					(player.getAltMove1() == null || !player.getAltMove1() ? "0" : "1")
+					+ ","
+					+ (player.getAltMove2() == null || !player.getAltMove2() ? "0" : "1"));
+	}
+	
 	private String getRemoteIP(HttpServletRequest req) {
 		String addr = req.getRemoteAddr();
 		if ("127.0.0.1".equals(addr) || "::1".equals(addr)) {
@@ -146,6 +155,8 @@ public class VF4NetUpload extends BaseVf4Servlet
 						addColor(outParams, i, player);
 						if (player.getEquip() != null)
 							outParams.put(QueryParams.playerQName(i, "equip"), player.getEquip());
+						if (gameType != Player.VF4_VANILLA)
+							addAltMoves(outParams, i, player);
 						if (gameType == Player.VF4_FT && player.getGameId() == Player.VF4_EVO)
 						{
 							// EVO cards are upgradable by FT
@@ -233,6 +244,8 @@ public class VF4NetUpload extends BaseVf4Servlet
 						addColor(outParams, i, player);
 						if (player.getEquip() != null)
 							outParams.put(QueryParams.playerQName(i, "equip"), player.getEquip());
+						if (gameType != Player.VF4_VANILLA)
+							addAltMoves(outParams, i, player);
 					}
 					else
 					{
@@ -473,7 +486,7 @@ public class VF4NetUpload extends BaseVf4Servlet
 			outParams = doTest(req, params);
 		else if ("message".equals(cmd))
 			sb.append(doMessage());
-		// vanilla:
+		// TODO vanilla:
 		// cmd=update_card&old_id_1p=%s&id_1p=%s&cnt=%d
 		// advise
 		else {
