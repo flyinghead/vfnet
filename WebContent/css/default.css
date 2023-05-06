@@ -9,7 +9,7 @@ body {
   border: 1px solid #cccccc;
   margin: 0px auto; 
   padding: 20px 20px; 
-  width: 850px;
+  width: 1050px;
 }
 
 h2 {
@@ -44,7 +44,7 @@ form div {
 }
 
 form div > label {
-  width: 250px;
+  width: 150px;
   display: block;
   float: left;
   text-align: right;
@@ -91,11 +91,13 @@ form div > table td, form div > table th {
 }
 
 form div > table th {
-  font-weight: normal;
-  background-color: #ddff77;
+  font-weight: bold;
   color: #000000;
 }
 
+form div > table td {
+  text-align: center;
+}
 
 form div.submit {
   margin-top: 40px;
@@ -152,4 +154,10 @@ ul.errorlist li {
     background-color: #f2d768;
     padding: 5px;
     margin: 3px 0px;
+}
+
+div.footer {
+	text-align: center;
+	color: #a0a0a0;
+	margin-top: 20px;
 }

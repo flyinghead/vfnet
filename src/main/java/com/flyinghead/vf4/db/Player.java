@@ -330,4 +330,85 @@ public class Player
 				+ ", wins=" + wins + ", losses=" + losses + ", stageProgress=" + stageProgress + ", quest=" + quest
 				+ ", emblem1=" + emblem1 + ", emblem2=" + emblem2 + ", color=" + color + "]";
 	}
+	
+	private int getEquip(int index) {
+		if (equip == null || equip.length() < 16)
+			return 0;
+		return Integer.parseInt(equip.substring(index, index + 2), 16);
+	}
+
+	private void setEquip(int index, int value) {
+		if (equip == null)
+			equip = "0000000000000000";
+		else if (equip.length() < 16)
+			equip = "0000000000000000".substring(0, 16 - equip.length()) + equip;
+		String s = Integer.toHexString(value);
+		if (s.length() < 2)
+			s = "0" + s;
+		equip = equip.substring(0, index) + s + equip.substring(index + 2);
+	}
+
+	public int getP1HeadEquip() {
+		return getEquip(0);
+	}
+
+	public void setP1HeadEquip(int v) {
+		setEquip(0, v);
+	}
+
+	public int getP1FaceEquip() {
+		return getEquip(2);
+	}
+
+	public void setP1FaceEquip(int v) {
+		setEquip(2, v);
+	}
+
+	public int getP1BodyEquip() {
+		return getEquip(4);
+	}
+
+	public void setP1BodyEquip(int v) {
+		setEquip(4, v);
+	}
+
+	public int getP1LegsEquip() {
+		return getEquip(6);
+	}
+
+	public void setP1LegsEquip(int v) {
+		setEquip(6, v);
+	}
+
+	public int getP2HeadEquip() {
+		return getEquip(8);
+	}
+
+	public void setP2HeadEquip(int v) {
+		setEquip(8, v);
+	}
+
+	public int getP2FaceEquip() {
+		return getEquip(10);
+	}
+
+	public void setP2FaceEquip(int v) {
+		setEquip(10, v);
+	}
+
+	public int getP2BodyEquip() {
+		return getEquip(12);
+	}
+
+	public void setP2BodyEquip(int v) {
+		setEquip(12, v);
+	}
+
+	public int getP2LegsEquip() {
+		return getEquip(14);
+	}
+
+	public void setP2LegsEquip(int v) {
+		setEquip(14, v);
+	}
 }

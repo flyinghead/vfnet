@@ -1,9 +1,12 @@
 package com.flyinghead.vf4.ui;
 
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetEncoder;
 import java.sql.Timestamp;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,20 +14,51 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.ServletContextAware;
 
 import com.flyinghead.vf4.db.IDbService;
 import com.flyinghead.vf4.db.Player;
 
 @Controller
-public class PlayerController {
+public class PlayerController implements ServletContextAware {
 	private static final Pattern HEXADECIMAL_PATTERN = Pattern.compile("\\p{XDigit}+");
 	private static final Pattern VANILLA_COLOR = Pattern.compile("^\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d$", 0);
 	private static final Pattern EVO_COLOR = Pattern.compile("^\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d$", 0);
-	
+
+	public static class ItemImageResolver {
+		private ServletContext context;
+		
+		public ItemImageResolver(ServletContext context) {
+			this.context = context;
+		}
+
+		public String getImage(int character, boolean p2, int item) {
+			return Items.getItemImage(context, character, p2, item);
+		}
+	}
+
 	@Autowired
     private IDbService dbService;
+
+    private ServletContext servletContext;
+	
+	@Override
+	public void setServletContext(ServletContext servletContext) {
+		this.servletContext = servletContext;
+	}
+
+	@ModelAttribute
+	public Items getItems() {
+		return new Items();
+	}
+	
+	@ModelAttribute
+	public ItemImageResolver getImgResolver() {
+		return new ItemImageResolver(servletContext);
+	}
 
 	@RequestMapping("/player")
 	public String editPlayer(@RequestParam("id") int playerId, final ModelMap model) {
@@ -42,10 +76,20 @@ public class PlayerController {
 	@RequestMapping(value="/player", params={"save"})
 	public String savePlayer(final Player player, final BindingResult bindingResult, final ModelMap model, HttpServletRequest req) {
 		if (player.getRingName().length() > 20)
-			bindingResult.addError(new FieldError("player", "ringName", "Name is too long"));
+			bindingResult.addError(new FieldError("player", "ringName", player.getRingName(), false, null, null, 
+					"Name is too long"));
+		CharsetEncoder encoder = Charset.forName("EUC-JP").newEncoder();
+		if (!encoder.canEncode(player.getRingName()))
+			bindingResult.addError(new FieldError("player", "ringName", player.getRingName(), false, null, null,
+					"Invalid character in ring name"));
+		encoder.reset();
 		if (player.getClanName().length() > 20)
-			bindingResult.addError(new FieldError("player", "clanName", "Clan is too long"));
-	    //System.out.println("Saving player " + player);
+			bindingResult.addError(new FieldError("player", "clanName", player.getClanName(), false, null, null,
+					"Clan is too long"));
+		if (!encoder.canEncode(player.getClanName()))
+			bindingResult.addError(new FieldError("player", "clanName", player.getClanName(), false, null, null,
+					"Invalid character in clan name"));
+	    System.out.println("Saving player " + player);
 	    Player persistedPlayer = dbService.getPlayer(player.getCardId());
 	    if (persistedPlayer == null)
 			throw new RuntimeException("Player not found");
@@ -55,13 +99,15 @@ public class PlayerController {
 		    	// 0,0,0,0,0,0,0,0
 		    	Matcher matcher = VANILLA_COLOR.matcher(player.getColor());
 		    	if (!matcher.find())
-		    		bindingResult.addError(new FieldError("player", "color", player.getColor(), false, null, null, "Invalid colors: 8 numbers separated by comma"));
+		    		bindingResult.addError(new FieldError("player", "color", player.getColor(), false, null, null,
+		    				"Invalid colors: 8 numbers separated by comma"));
 		    }
 		    else {
 		    	// 0,0,0,0,0,0,0,0,0,0,0,0
 		    	Matcher matcher = EVO_COLOR.matcher(player.getColor());
 		    	if (!matcher.find())
-		    		bindingResult.addError(new FieldError("player", "color", player.getColor(), false, null, null, "Invalid colors: 12 numbers separated by comma"));
+		    		bindingResult.addError(new FieldError("player", "color", player.getColor(), false, null, null, 
+		    				"Invalid colors: 12 numbers separated by comma"));
 		    }
 	    }
 	    if (player.getEquip() != null && !player.getEquip().isEmpty()) {

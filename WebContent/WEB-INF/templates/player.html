@@ -64,6 +64,90 @@
                 <label for="equip">Equipment</label>
                 <input type="text" th:field="*{equip}" size="16" />
             </div>
+            <div>
+                <label for="equip">P1 Equipment</label>
+                <table>
+                  <tr><th>Head</th><th>Face</th><th>Body</th><th>Legs</th></tr>
+                  <tr>
+                   <td>
+	                <select th:field="*{p1HeadEquip}">
+	                  <option th:each="entry : ${items.getHeadItems(player.character, false).entrySet()}" th:text="${entry.value}" th:value="${entry.key}">Sword</option>
+	                </select>
+	               </td>
+                   <td>
+	                <select th:field="*{p1FaceEquip}">
+	                  <option th:each="entry : ${items.getFaceItems(player.character, false).entrySet()}" th:text="${entry.value}" th:value="${entry.key}">Sword</option>
+	                </select>
+	               </td>
+                   <td>
+	                <select th:field="*{p1BodyEquip}">
+	                  <option th:each="entry : ${items.getBodyItems(player.character, false).entrySet()}" th:text="${entry.value}" th:value="${entry.key}">Sword</option>
+	                </select>
+	               </td>
+                   <td>
+	                <select th:field="*{p1LegsEquip}">
+	                  <option th:each="entry : ${items.getLegsItems(player.character, false).entrySet()}" th:text="${entry.value}" th:value="${entry.key}">Sword</option>
+	                </select>
+	               </td>
+                  </tr>
+                  <tr>
+                   <td>
+	                <img th:src="@{${itemImageResolver.getImage(player.character, false, player.p1HeadEquip)}}" src="/images/items/nopic.gif" />
+	               </td>
+                   <td>
+	                <img th:src="@{${itemImageResolver.getImage(player.character, false, player.p1FaceEquip)}}" src="/images/items/nopic.gif" />
+	               </td>
+                   <td>
+	                <img th:src="@{${itemImageResolver.getImage(player.character, false, player.p1BodyEquip)}}" src="/images/items/nopic.gif" />
+	               </td>
+                   <td>
+	                <img th:src="@{${itemImageResolver.getImage(player.character, false, player.p1LegsEquip)}}" src="/images/items/nopic.gif" />
+	               </td>
+	              </tr>
+            	</table>
+            </div>
+            <div>
+                <label for="equip">P2 Equipment</label>
+                <table>
+                  <tr><th>Head</th><th>Face</th><th>Body</th><th>Legs</th></tr>
+                  <tr>
+                   <td>
+	                <select th:field="*{p2HeadEquip}">
+	                  <option th:each="entry : ${items.getHeadItems(player.character, true).entrySet()}" th:text="${entry.value}" th:value="${entry.key}">Sword</option>
+	                </select>
+	               </td>
+                   <td>
+	                <select th:field="*{p2FaceEquip}">
+	                  <option th:each="entry : ${items.getFaceItems(player.character, true).entrySet()}" th:text="${entry.value}" th:value="${entry.key}">Sword</option>
+	                </select>
+	               </td>
+                   <td>
+	                <select th:field="*{p2BodyEquip}">
+	                  <option th:each="entry : ${items.getBodyItems(player.character, true).entrySet()}" th:text="${entry.value}" th:value="${entry.key}">Sword</option>
+	                </select>
+	               </td>
+                   <td>
+	                <select th:field="*{p2LegsEquip}">
+	                  <option th:each="entry : ${items.getLegsItems(player.character, true).entrySet()}" th:text="${entry.value}" th:value="${entry.key}">Sword</option>
+	                </select>
+                   </td>
+                  </tr>
+                  <tr>
+                   <td>
+	                <img th:src="@{${itemImageResolver.getImage(player.character, true, player.p2HeadEquip)}}" src="/images/items/nopic.gif" />
+	               </td>
+                   <td>
+	                <img th:src="@{${itemImageResolver.getImage(player.character, true, player.p2FaceEquip)}}" src="/images/items/nopic.gif" />
+	               </td>
+                   <td>
+	                <img th:src="@{${itemImageResolver.getImage(player.character, true, player.p2BodyEquip)}}" src="/images/items/nopic.gif" />
+	               </td>
+                   <td>
+	                <img th:src="@{${itemImageResolver.getImage(player.character, true, player.p2LegsEquip)}}" src="/images/items/nopic.gif" />
+	               </td>
+	              </tr>
+                </table>
+            </div>
             <div th:unless="${param.message == null}">
 	          	<span th:text="${param.message}">changes saved</span>
             </div>
@@ -106,6 +190,10 @@
           </tr>
         </tbody>
       </table>
+    </div>
+    <div class="footer">
+    	Source: Virtua Fighter 4 Evolution Complete Guide and virtuafighter.com<br>
+    	Virtua Fighter and all related material © SEGA
     </div>
 </body>
 </html>
