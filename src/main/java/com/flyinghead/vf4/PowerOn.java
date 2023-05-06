@@ -1,3 +1,20 @@
+/*
+	vf.net web server revival
+	Copyright (C) 2023 flyinghead
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
 package com.flyinghead.vf4;
 
 import java.io.ByteArrayInputStream;
@@ -6,6 +23,7 @@ import java.net.Inet4Address;
 import java.net.InterfaceAddress;
 import java.net.NetworkInterface;
 import java.util.Base64;
+import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.zip.DeflaterInputStream;
@@ -85,10 +103,10 @@ public class PowerOn extends HttpServlet
 		sb = new StringBuilder();
 		sb.append("stat=1&uri=http://")
 			.append(getServletContext().getAttribute("localIp"))
-//			.append("192.168.1.30")
+//			.append("127.0.0.1")
 			.append("/sys/servlet/vf4/&host=naominet.jp");
 		sb.append("&place_id=0001");
-		/*
+		
 		Calendar cal = Calendar.getInstance();
 		sb.append("&year=").append(String.valueOf(cal.get(Calendar.YEAR)));
 		sb.append("&month=").append(String.valueOf(1 + cal.get(Calendar.MONTH)));
@@ -96,7 +114,7 @@ public class PowerOn extends HttpServlet
 		sb.append("&hour=").append(String.valueOf(cal.get(Calendar.HOUR_OF_DAY)));
 		sb.append("&minute=").append(String.valueOf(cal.get(Calendar.MINUTE)));
 		sb.append("&second=").append(String.valueOf(cal.get(Calendar.SECOND)));
-		*/
+		
 		log(" -> " + sb.toString());
 
 		// deflate

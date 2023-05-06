@@ -1,3 +1,20 @@
+/*
+	vf.net web server revival
+	Copyright (C) 2023 flyinghead
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
 package com.flyinghead.vf4;
 
 import java.io.ByteArrayInputStream;
@@ -155,7 +172,7 @@ public class VF4NetUpload extends BaseVf4Servlet
 						addColor(outParams, i, player);
 						if (player.getEquip() != null)
 							outParams.put(QueryParams.playerQName(i, "equip"), player.getEquip());
-						if (gameType != Player.VF4_VANILLA)
+						if (gameType == Player.VF4_FT)
 							addAltMoves(outParams, i, player);
 						if (gameType == Player.VF4_FT && player.getGameId() == Player.VF4_EVO)
 						{
@@ -244,7 +261,7 @@ public class VF4NetUpload extends BaseVf4Servlet
 						addColor(outParams, i, player);
 						if (player.getEquip() != null)
 							outParams.put(QueryParams.playerQName(i, "equip"), player.getEquip());
-						if (gameType != Player.VF4_VANILLA)
+						if (gameType == Player.VF4_FT)
 							addAltMoves(outParams, i, player);
 					}
 					else
