@@ -500,7 +500,7 @@ public class VF4NetUpload extends BaseVf4Servlet
 			{
 				if (sb.length() > 0)
 					sb.append('&');
-				sb.append(name).append('=').append(URLEncoder.encode(outParams.get(name), "UTF-8"));
+				sb.append(name).append('=').append(URLEncoder.encode(outParams.get(name), "EUC-JP"));
 			}
 		}
 		log(" -> " + sb.toString());

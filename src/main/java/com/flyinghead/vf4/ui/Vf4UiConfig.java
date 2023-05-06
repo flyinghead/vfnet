@@ -1,14 +1,19 @@
 package com.flyinghead.vf4.ui;
 
+import javax.servlet.FilterRegistration;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.datetime.DateFormatter;
+import org.springframework.web.WebApplicationInitializer;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -20,7 +25,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 
 @Configuration
 @EnableWebMvc
-public class Vf4UiConfig implements ApplicationContextAware, WebMvcConfigurer {
+public class Vf4UiConfig implements ApplicationContextAware, WebMvcConfigurer, WebApplicationInitializer {
 
 	private ApplicationContext applicationContext;
 
@@ -94,6 +99,7 @@ public class Vf4UiConfig implements ApplicationContextAware, WebMvcConfigurer {
     public ThymeleafViewResolver viewResolver() {
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
         viewResolver.setTemplateEngine(templateEngine());
+        viewResolver.setCharacterEncoding("UTF-8");
         
         return viewResolver;
     }
@@ -104,4 +110,12 @@ public class Vf4UiConfig implements ApplicationContextAware, WebMvcConfigurer {
         multipartResolver.setMaxUploadSize(512);
         return multipartResolver;
     }
+    
+	@Override
+	public void onStartup(ServletContext servletContext) throws ServletException {
+    	FilterRegistration.Dynamic filterRegistration = servletContext.addFilter("characterEncodingFilter", new CharacterEncodingFilter());
+        filterRegistration.setInitParameter("encoding", "UTF-8");
+        filterRegistration.setInitParameter("forceEncoding", "true");
+        filterRegistration.addMappingForUrlPatterns(null, true, "/ui/*");
+	}
 }
