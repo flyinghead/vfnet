@@ -50,73 +50,73 @@ public class Player
 	private int gameId;
 	
 	@Column(name = "ring_name")
-	String ringName;
+	private String ringName;
 	
 	@Column(name = "clan_name")
-	String clanName;
+	private String clanName;
 	
 	@Column(name = "\"character\"")
-	Integer character;
+	private Integer character;
 	
 	@Column(name = "created")
-	Timestamp created;
+	private Timestamp created;
 	
 	@Column(name = "last_seen")
-	Timestamp lastSeen;
+	private Timestamp lastSeen;
 	
 	@Column(name = "created_ip")
-	String createdIp;
+	private String createdIp;
 	
 	@Column(name = "last_seen_ip")
-	String lastSeenIp;
+	private String lastSeenIp;
 	
 	@Column(name = "exp_points")
-	int expPoints;
+	private int expPoints;
 	
 	@Column(name = "ranking_points")
-	int rankingPoints;
+	private int rankingPoints;
 	
 	@Column(name = "my_tenpo_points")
-	int myTenpoPoints;
+	private int myTenpoPoints;
 	
 	@Column(name = "level")
-	int level;
+	private int level;
 	
 	@Column(name = "wins")
-	int wins;
+	private int wins;
 
 	@Column(name = "losses")
-	int losses;
+	private int losses;
 	
 	@Column(name = "stage_progress")
-	int stageProgress;
+	private int stageProgress;
 	
 	@Column(name = "quest")
-	String quest;
+	private String quest;
 	
 	@Column(name = "emblem1")
-	int emblem1;
+	private int emblem1;
 
 	@Column(name = "emblem2")
-	int emblem2;
+	private int emblem2;
 	
 	@Column(name = "color")
-	String color;
+	private String color;
 
 	@Column(name = "equip")
-	String equip;
+	private String equip;
 	
 	@Column(name = "alt_move_1")
-	Boolean altMove1;
+	private Boolean altMove1;
 	
 	@Column(name = "alt_move_2")
-	Boolean altMove2;
+	private Boolean altMove2;
 
 	@OneToMany(mappedBy="winner")
-    private List<Match> wonMatches = new ArrayList<Match>();
+	private List<Match> wonMatches = new ArrayList<Match>();
 
-    @OneToMany(mappedBy="looser")
-    private List<Match> lostMatches = new ArrayList<Match>();
+	@OneToMany(mappedBy="looser")
+	private List<Match> lostMatches = new ArrayList<Match>();
 
 	public int getCardId() {
 		return cardId;

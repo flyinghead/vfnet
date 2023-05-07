@@ -78,7 +78,7 @@ public class PlayerController implements ServletContextAware {
 	}
 
 	@RequestMapping("/player")
-	public String editPlayer(@RequestParam("id") int playerId, final ModelMap model) {
+	public String editPlayer(@RequestParam("id") int playerId, final ModelMap model, @RequestParam(value="advanced", defaultValue="false") boolean advanced) {
 		if (playerId == 0)
 			throw new IllegalStateException("Null player id");
 		Player player = dbService.getPlayer(playerId);
@@ -86,6 +86,7 @@ public class PlayerController implements ServletContextAware {
 			throw new RuntimeException("Player not found");
 		model.addAttribute("player", player);
 		model.addAttribute("matchList", dbService.listPlayerMatches(playerId));
+		model.addAttribute("advanced", advanced);
 		
 	    return "player";
 	}

@@ -38,23 +38,23 @@ public class Match {
 
 	@ManyToOne
 	@JoinColumn(name="winner_id")
-	Player winner;
+	private Player winner;
 
 	@ManyToOne
 	@JoinColumn(name="looser_id")
-	Player looser;
+	private Player looser;
 
     @Column(name = "end_time")
 	private Timestamp endTime;
     
     @Column(name = "win_character")
-    int winCharacter;
+    private int winCharacter;
     
     @Column(name = "loose_character")
-    int looseCharacter;
+    private int looseCharacter;
     
     @Column(name = "chain_of_win")
-    int chainOfWin;
+    private int chainOfWin;
 
 	public int getId() {
 		return id;

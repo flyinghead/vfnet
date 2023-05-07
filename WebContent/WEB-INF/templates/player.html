@@ -60,11 +60,7 @@
                 <input type="text" th:field="*{emblem1}" size="2" />
                 <input type="text" th:field="*{emblem2}" size="2" />
             </div>
-            <!-- div>
-                <label for="equip">Equipment</label>
-                <input type="text" th:field="*{equip}" size="16" />
-            </div -->
-            <div>
+            <div th:unless="${advanced}">
                 <label for="equip">P1 Equipment</label>
                 <table>
                   <tr><th>Head</th><th>Face</th><th>Body</th><th>Legs</th></tr>
@@ -106,7 +102,7 @@
 	              </tr>
             	</table>
             </div>
-            <div>
+            <div th:unless="${advanced}">
                 <label for="equip">P2 Equipment</label>
                 <table>
                   <tr><th>Head</th><th>Face</th><th>Body</th><th>Legs</th></tr>
@@ -147,6 +143,10 @@
 	               </td>
 	              </tr>
                 </table>
+            </div>
+            <div th:if="${advanced}">
+                <label for="equip">Raw Equipment</label>
+                <input type="text" th:field="*{equip}" size="16" /> (Experts only)
             </div>
             <div th:unless="${param.message == null}">
 	          	<span th:text="${param.message}">changes saved</span>

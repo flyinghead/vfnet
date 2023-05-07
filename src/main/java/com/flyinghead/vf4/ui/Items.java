@@ -61,6 +61,7 @@ public class Items {
 			items[i].p1Items.head.put(101, "Tutankhamen's Mask");
 			items[i].p1Items.body.put(80, "Glowing Bracelet");
 			// FT only?
+			/* TODO explore this range
 			items[i].p1Items.body.put(161, "Big White Gloves");
 			items[i].p1Items.body.put(162, "Flame thrower");
 			items[i].p1Items.body.put(163, "Sonic the hedgehog");
@@ -68,6 +69,7 @@ public class Items {
 			items[i].p1Items.body.put(165, "Big Trophy");
 			items[i].p1Items.body.put(166, "Opa-opa");
 			items[i].p1Items.body.put(167, "Nights");
+			*/
 		}
 		// akira
 		items[0].p1Items.head.put(1, "Wild Hair");
@@ -176,10 +178,11 @@ public class Items {
 		items[1].p1Items.legs.put(82, "Survival Knife");
 		items[1].p1Items.legs.put(83, "Whip");
 		items[1].p1Items.legs.put(84, "Nightstick");
-		items[1].p1Items.legs.put(86, "Waist Belt");
-		items[1].p1Items.legs.put(87, "Cat Leash");
-		items[1].p1Items.legs.put(88, "Waist Pouch");
-		items[1].p1Items.legs.put(89, "Leopard Leg Guard");
+		items[1].p1Items.legs.put(85, "Waist Belt");
+		items[1].p1Items.legs.put(86, "Cat Leash");
+		items[1].p1Items.legs.put(87, "Waist Pouch");
+		items[1].p1Items.legs.put(88, "Leopard Leg Guard");
+		items[1].p1Items.legs.put(89, "Alexander (beaver)");
 		
 		// lau
 		items[2].p1Items.head.put(1, "Gold Bead Crown");
@@ -368,6 +371,8 @@ public class Items {
 		items[5].p1Items.face.put(31, "Peking Opera Makeup");
 		items[5].p1Items.face.put(32, "Violet Sunglasses");
 		items[5].p1Items.face.put(33, "White Sunglasses");
+		items[5].p1Items.head.put(34, "Black Eye Shadow");
+		items[5].p1Items.head.put(35, "Green Eye Shadow");
 		items[5].p1Items.body.put(51, "Crystal Necklace");
 		items[5].p1Items.body.put(52, "Lily Bracelet");
 		items[5].p1Items.body.put(53, "Bronze Necklace");
@@ -389,10 +394,10 @@ public class Items {
 		items[5].p1Items.body.put(69, "Bamboo Grass Necklace");
 		items[5].p1Items.body.put(70, "Spindle");
 		items[5].p1Items.body.put(71, "Porcelain Necklace");
-		items[5].p1Items.legs.put(81, "Knee Armor");
-		items[5].p1Items.legs.put(82, "Egyptian Anklet");
-		items[5].p1Items.legs.put(83, "Crimson Gem Shin Guards");
-		items[5].p1Items.legs.put(84, "Crystal Knee Armor");
+		items[5].p2Items.legs.put(81, "Knee Armor");
+		items[5].p2Items.legs.put(82, "Egyptian Anklet");
+		items[5].p2Items.legs.put(83, "Crimson Gem Shin Guards");
+		items[5].p2Items.legs.put(84, "Crystal Knee Armor");
 		items[5].p1Items.legs.put(85, "Flame Knee Armor");
 		items[5].p1Items.legs.put(86, "7-Head Daggers");
 		items[5].p1Items.legs.put(87, "Bamboo Anklette");
