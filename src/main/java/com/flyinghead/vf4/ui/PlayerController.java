@@ -108,7 +108,7 @@ public class PlayerController implements ServletContextAware {
 			bindingResult.addError(new FieldError("player", "clanName", player.getClanName(), false, null, null,
 					"Invalid character in clan name"));
 		encoder.reset();
-		String[] lines = player.getPresentation().split("\n");
+		String[] lines = player.getPresentation().split("\r\n");
 		if (lines.length > 3)
 			bindingResult.addError(new FieldError("player", "presentation", player.getPresentation(), false, null, null,
 					"Presentation max 3 lines"));
