@@ -111,6 +111,9 @@ public class Player
 	
 	@Column(name = "alt_move_2")
 	private Boolean altMove2;
+	
+	@Column(name = "presentation")
+	private String presentation;
 
 	@OneToMany(mappedBy="winner")
 	private List<Match> wonMatches = new ArrayList<Match>();
@@ -427,5 +430,13 @@ public class Player
 
 	public void setP2LegsEquip(int v) {
 		setEquip(14, v);
+	}
+
+	public String getPresentation() {
+		return presentation;
+	}
+
+	public void setPresentation(String presentation) {
+		this.presentation = presentation;
 	}
 }

@@ -261,8 +261,11 @@ public class VF4NetUpload extends BaseVf4Servlet
 						addColor(outParams, i, player);
 						if (player.getEquip() != null)
 							outParams.put(QueryParams.playerQName(i, "equip"), player.getEquip());
-						if (gameType == Player.VF4_FT)
+						if (gameType == Player.VF4_FT) {
 							addAltMoves(outParams, i, player);
+							if (player.getPresentation() != null && !player.getPresentation().isBlank())
+								outParams.put(QueryParams.playerQName(i, "pr"), player.getPresentation());
+						}
 					}
 					else
 					{
@@ -301,6 +304,7 @@ public class VF4NetUpload extends BaseVf4Servlet
 		//  &item_have_1p=2,4,5&item_curse_1p=0&color_1p=1,1,1,0,0,0,0,0,0,0,0,0&ranking_point_1p=0&my_tenpo_point_1p=0&quest_1p=0,0,0&vs_char_1p=1
 		//  &access_code_2p=4240965643711192&card_id_2p=0&exp_2p=18&char_2p=1&level_2p=0&win_2p=1&lose_2p=0&level_other_2p=0,1,2&item_equip_2p=0000000000000000
 		//  &item_have_2p=2,5&item_curse_2p=0&color_2p=0,0,0,0,0,0,0,0,0,0,0,0&ranking_point_2p=0&my_tenpo_point_2p=0&quest_2p=0,0,0&vs_char_2p=12&cnt=5
+		// bookmark_1p/2p=1		pressing P+K+G at the end of the will "mark" the opponent and should be bookmarked in the db
 		// vanilla:
 		// cmd=end&id=870320-15-53-20001&serial=37821967197&place_id=0001&win=0&chain_of_win=0&id_1p=4240965643711192&exp_1p=13&advise_1p=
 		// 2,14,402,0,0,2,1,25,1,1,
@@ -433,7 +437,7 @@ public class VF4NetUpload extends BaseVf4Servlet
 		// color_1p				exactly 12 mv byte values [0-20] (8 for vanilla)
 		// leader_1p
 		// money_1p
-		// chat[0-3]_1p
+		// chat[0-3]_1p			string, max 60 chars, with \n
 		// card_id_1p 			int, [0-0xffffff] (evo and ft)
 		// tenpo_info_1p		2 values: short, [0-10] (2nd used if nushi=1)
 		// disp_1p				0-7

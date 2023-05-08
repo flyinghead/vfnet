@@ -83,8 +83,20 @@ public class Items {
 		items[0].p1Items.head.put(9, "Black Hood");
 		items[0].p1Items.head.put(10, "Victory Headband");
 		items[0].p1Items.head.put(11, "Navy Blue Bandana");
+		// FT only?
+		items[0].p1Items.head.put(12, "Wolf-chan");
+		items[0].p1Items.head.put(13, "Messy Long Hair");
+		items[0].p1Items.head.put(14, "Pony Tail");
+		items[0].p1Items.head.put(15, "Bamboo Hat");
+		items[0].p1Items.head.put(16, "Big Chonmage");
+		items[0].p1Items.head.put(17, "Santa Hat");
+		items[0].p1Items.head.put(18, "Halloween Hat");
+		items[0].p1Items.head.put(19, "Crown");
+		items[0].p1Items.head.put(102, "Daruma Mask");
 		items[0].p1Items.head.put(103, "Head Gear (White)");
 		items[0].p1Items.head.put(104, "Head Gear (Red)");
+		items[0].p1Items.head.put(105, "Japanese Fencing Helmet");
+		
 		items[0].p1Items.face.put(31, "Sunglasses (Blue)");
 		items[0].p1Items.face.put(32, "Sunglasses (Black)");
 		items[0].p1Items.face.put(33, "Sunglasses (Goggle)");
@@ -94,6 +106,7 @@ public class Items {
 		items[0].p1Items.face.put(37, "Tengu Mask");
 		items[0].p1Items.face.put(38, "Kabuki Face Paint");
 		items[0].p1Items.face.put(39, "Demon Mask");
+
 		items[0].p1Items.body.put(51, "Demon Emblem");
 		items[0].p1Items.body.put(52, "Spiked Arm Brace");
 		items[0].p1Items.body.put(53, "Lucky Charm");
@@ -116,11 +129,32 @@ public class Items {
 		items[0].p1Items.body.put(70, "Risu-san");
 		items[0].p1Items.body.put(71, "Usagi-san");
 		items[0].p1Items.body.put(72, "Yuki Dojo Sign");
+		// FT only?
+		items[0].p1Items.body.put(73, "Gama (Toad)");
+		items[0].p1Items.body.put(74, "Tora Tiger");
+		items[0].p1Items.body.put(75, "Panda-chi");
+		items[0].p1Items.body.put(76, "Wood Warbler Joe");
+		items[0].p1Items.body.put(77, "Fukurou (owl)");
+		items[0].p1Items.body.put(78, "ChoCho (Butterflies)");
+		items[0].p1Items.body.put(79, "Japanese Fencing Armor");
+		
 		items[0].p1Items.legs.put(81, "Gloves");
 		items[0].p1Items.legs.put(82, "Spare Gi");
 		items[0].p1Items.legs.put(83, "Dumbell");
 		items[0].p1Items.legs.put(84, "Wooden Clogs");
 		items[0].p1Items.legs.put(85, "Conch Shell");
+		// FT only?
+		items[0].p1Items.legs.put(86, "Alien Skeleton");
+		items[0].p1Items.legs.put(87, "Araguma-chan (Raccoon)");
+		items[0].p1Items.legs.put(88, "Alexander (Beaver)");
+		items[0].p1Items.legs.put(89, "Small Shark");
+		items[0].p1Items.legs.put(90, "OneBull-chan (Bulldog)");
+		items[0].p1Items.legs.put(91, "PuraPura Neko-chan");
+		items[0].p1Items.legs.put(92, "PuraPura Usagi-chan");
+		items[0].p1Items.legs.put(93, "My Monkey");
+		items[0].p1Items.legs.put(94, "Puchin Bee");
+		items[0].p1Items.legs.put(95, "Bamboo Katana");
+		items[0].p1Items.legs.put(96, "Masamune Sword");
 		
 		// sarah
 		items[1].p1Items.head.put(1, "Short Hair");
@@ -174,6 +208,16 @@ public class Items {
 		items[1].p1Items.body.put(69, "White Wings");
 		items[1].p1Items.body.put(70, "Black Wings");
 		items[1].p1Items.body.put(71, "Gold Necklace");
+		items[1].p1Items.body.put(161, "Fukurou (owl)");
+		items[1].p1Items.body.put(162, "Butterflies");
+		items[1].p1Items.body.put(163, "Sceptre");
+		items[1].p1Items.body.put(165, "Long Lace Gloves");
+		items[1].p1Items.body.put(167, "Big White Gloves");
+		items[1].p1Items.body.put(168, "Sonic The Hedgehog");
+		items[1].p1Items.body.put(169, "Koinobori");
+		items[1].p1Items.body.put(170, "Big Trophy");
+		items[1].p1Items.body.put(171, "Opa-opa");
+		items[1].p1Items.body.put(172, "Nights");
 		items[1].p1Items.legs.put(81, "Holster");
 		items[1].p1Items.legs.put(82, "Survival Knife");
 		items[1].p1Items.legs.put(83, "Whip");
@@ -764,7 +808,17 @@ public class Items {
 		items[12].p1Items.head.put(10, "Armor Helmet");
 		items[12].p1Items.head.put(11, "Camouflage Bandana");
 		items[12].p1Items.head.put(14, "Marines Beret");
-		items[12].p1Items.head.put(103, "Hockey Mask");
+		items[12].p1Items.head.put(15, "Wolf Head Hat");
+		items[12].p1Items.head.put(16, "High Bunches Hair");
+		items[12].p1Items.head.put(17, "Long Curly Hair");
+		items[12].p1Items.head.put(18, "Camouflage Cap");
+		items[12].p1Items.head.put(19, "Peaked Cap");
+		items[12].p1Items.head.put(20, "Santa Hat");
+		items[12].p1Items.head.put(21, "Halloween Hat");
+		items[12].p1Items.head.put(22, "Crown");
+		items[12].p1Items.head.put(102, "Daruma Mask");
+		//items[12].p1Items.head.put(103, "Hockey Mask");	// not working
+		
 		items[12].p1Items.face.put(31, "Goggles");
 		items[12].p1Items.face.put(32, "Yellow Sports Sunglasses");
 		items[12].p1Items.face.put(33, "Oldies Sunglasses");
@@ -778,6 +832,10 @@ public class Items {
 		items[12].p1Items.face.put(41, "Headset");
 		items[12].p1Items.face.put(42, "Camouflage Face Paint");
 		items[12].p1Items.face.put(43, "Full Vision Gas Mask");
+		items[12].p1Items.face.put(44, "Aqua Eye Shadow");
+		items[12].p1Items.face.put(45, "Red & Yellow Eye Shadow");
+		items[12].p1Items.face.put(46, "Feather Eye Mask");
+		
 		items[12].p1Items.body.put(51, "Binoculars");
 		items[12].p1Items.body.put(52, "Rifle");
 		items[12].p1Items.body.put(53, "Medal Necklace");
@@ -802,21 +860,25 @@ public class Items {
 		items[12].p1Items.body.put(67, "Vulcan Machinegun");
 		items[12].p1Items.body.put(68, "Fukurou (owl)");
 		// FT only?
-		items[12].p1Items.body.put(69, "Big bear");
-		items[12].p1Items.body.put(70, "Little bear");
-		// TODO 71 Risu-san (Squirrel)
-		// 72 Usagi-san (Bunny)
-		// 73 Gama (Toad)
-		// 74 Tora Tiger
-		// 75 Panda-chi
-		// 76 Wood warbler joe
-		// 161 Big White Gloves
-		// 162 Flame thrower
-		// 163 Sonic the hedgehog
-		// 164 Koinobori
-		// 165 Big Trophy
-		// 166 Opa-opa
-		// 167 Nights
+		items[12].p1Items.body.put(69, "Big Bear");
+		items[12].p1Items.body.put(70, "Little Bear");
+		items[12].p1Items.body.put(71, "Risu-san (Squirrel)");
+		items[12].p1Items.body.put(72, "Usagi-san (Bunny)");
+		items[12].p1Items.body.put(73, "Gama (Toad)");
+		items[12].p1Items.body.put(74, "Tora Tiger");
+		items[12].p1Items.body.put(75, "Panda-chi");
+		items[12].p1Items.body.put(76, "Wood Warbler Joe");
+		items[12].p1Items.body.put(77, "ChoCho (Butterflies)");
+		items[12].p1Items.body.put(78, "Mini Helicopter");
+		items[12].p1Items.body.put(79, "Rocket Launcher");
+		items[12].p1Items.body.put(161, "Big White Gloves");
+		items[12].p1Items.body.put(162, "Flame thrower");
+		items[12].p1Items.body.put(163, "Sonic the hedgehog");
+		items[12].p1Items.body.put(164, "Koinobori");
+		items[12].p1Items.body.put(165, "Big Trophy");
+		items[12].p1Items.body.put(166, "Opa-opa");
+		items[12].p1Items.body.put(167, "Nights");
+
 		items[12].p1Items.legs.put(81, "Hand Grenades");
 		items[12].p1Items.legs.put(82, "Bazooka");
 		items[12].p1Items.legs.put(83, "Jungle Knife");
@@ -824,8 +886,10 @@ public class Items {
 		items[12].p1Items.legs.put(85, "Water Bottles");
 		items[12].p1Items.legs.put(86, "Rope");
 		items[12].p1Items.legs.put(87, "Tonfa");
-		// TODO 88 Araguma-chan (raccoon)
-		// 89 Risu-san (Squirrel)
+		items[12].p1Items.legs.put(88, "Araguma-chan (Raccoon)");
+		items[12].p1Items.legs.put(89, "Risu-san (Squirrel)");
+		items[12].p1Items.legs.put(90, "Small Shark");
+		items[12].p1Items.legs.put(91, "OneBull-chan (Bulldog)");
 		
 		// TODO dural
 		//items[13].p1Items.head.put(1, "");

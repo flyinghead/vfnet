@@ -47,6 +47,10 @@
           	  <input type="text" th:field="*{clanName}" size="20" th:errorclass="fieldError" />
           	</div>
           	<div th:if="${player.gameId == 2}">
+          	  <label for="presentation">Presentation:</label>
+          	  <textarea name="presentation" cols="30" rows="3" th:field="*{presentation}" th:errorclass="fieldError">Hello world</textarea>
+          	</div>
+          	<div th:if="${player.gameId == 2}">
           	  <label for="altMove1">Alternate Moves:</label>
           	  <label for="altMove1">A</label> <input type="checkbox" th:field="*{altMove1}" th:errorclass="fieldError" />
           	  <label for="altMove1">B</label> <input type="checkbox" th:field="*{altMove2}" th:errorclass="fieldError" />

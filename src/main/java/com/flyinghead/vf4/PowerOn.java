@@ -111,10 +111,8 @@ public class PowerOn extends HttpServlet
 		sb.append("&year=").append(String.valueOf(cal.get(Calendar.YEAR)));
 		sb.append("&month=").append(String.valueOf(1 + cal.get(Calendar.MONTH)));
 		sb.append("&day=").append(String.valueOf(cal.get(Calendar.DAY_OF_MONTH)));
-		sb.append("&hour=").append(String.valueOf(cal.get(Calendar.HOUR_OF_DAY)));
-		sb.append("&minute=").append(String.valueOf(cal.get(Calendar.MINUTE)));
-		sb.append("&second=").append(String.valueOf(cal.get(Calendar.SECOND)));
-		
+		sb.append("&hour=16&minute=20&second=00");
+
 		log(" -> " + sb.toString());
 
 		// deflate
