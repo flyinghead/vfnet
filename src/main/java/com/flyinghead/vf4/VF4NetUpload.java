@@ -444,7 +444,7 @@ public class VF4NetUpload extends BaseVf4Servlet
 		// user_1p 				1 or 2
 		// foul_1p 				set or not
 		// revise_1p
-		// pr_1p
+		// pr_1p				multiline string, max 3 lines of 30 characters (actually more but display is limited)
 		// nickname_lv_1p		mv 9 bytes strict?
 		// nickname_pt_1p		mv 3*7 shorts strict?
 		// nickname_para_1p		mv 3 bytes strict?

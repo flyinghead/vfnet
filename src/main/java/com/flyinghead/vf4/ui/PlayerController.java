@@ -112,10 +112,15 @@ public class PlayerController implements ServletContextAware {
 		if (lines.length > 3)
 			bindingResult.addError(new FieldError("player", "presentation", player.getPresentation(), false, null, null,
 					"Presentation max 3 lines"));
-		else if (lines[0].length() > 30 || lines[1].length() > 30 || lines[2].length() > 30)
-			bindingResult.addError(new FieldError("player", "presentation", player.getPresentation(), false, null, null,
-					"Presentation max 30 characters per line"));
-		else if (!encoder.canEncode(player.getPresentation()))
+		else {
+			for (String line : lines)
+				if (line.length() > 30) {
+					bindingResult.addError(new FieldError("player", "presentation", player.getPresentation(), false, null, null,
+							"Presentation max 30 characters per line"));
+					break;
+				}
+		}
+		if (!encoder.canEncode(player.getPresentation()))
 			bindingResult.addError(new FieldError("player", "presentation", player.getPresentation(), false, null, null,
 					"Invalid character in presentation"));
 	    System.out.println("Saving player " + player);
