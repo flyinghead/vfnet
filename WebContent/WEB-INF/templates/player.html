@@ -24,46 +24,41 @@
 	            <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
           	</ul>
           	<div>
-          	  <label for="cardId">ID:</label>
+          	  <label for="cardId">ID</label>
           	  <span id="cardId" th:text="${player.cardId}">123</span>
           	</div>
           	<div>
-          	  <label for="character">Character:</label>
+          	  <label for="character">Character</label>
           	  <span id="character" th:text="${player.characterName}">Goh</span>
           	</div>
           	<div>
-          	  <label>Stats:</label>
+          	  <label>Stats</label>
           	  Level: <span th:text="${player.level}">2</span>
           	  XP Points: <span th:text="${player.expPoints}">204</span>
           	  Wins: <span th:text="${player.wins}">2</span>
           	  Losses: <span th:text="${player.losses}">2</span>
           	</div>
           	<div>
-          	  <label for="ringName">Ring Name:</label>
+          	  <label for="ringName">Ring Name</label>
           	  <input type="text" th:field="*{ringName}" size="20" th:errorclass="fieldError" />
           	</div>
           	<div>
-          	  <label for="clanName">Clan Name:</label>
+          	  <label for="clanName">Clan Name</label>
           	  <input type="text" th:field="*{clanName}" size="20" th:errorclass="fieldError" />
           	</div>
           	<div th:if="${player.gameId == 2}">
-          	  <label for="presentation">Presentation:</label>
+          	  <label for="presentation">Presentation</label>
           	  <textarea name="presentation" cols="30" rows="3" th:field="*{presentation}" th:errorclass="fieldError">Hello world</textarea>
           	</div>
           	<div th:if="${player.gameId == 2}">
-          	  <label for="altMove1">Alternate Moves:</label>
+          	  <label for="altMove1">Alternate Moves</label>
           	  <label for="altMove1">A</label> <input type="checkbox" th:field="*{altMove1}" th:errorclass="fieldError" />
           	  <label for="altMove1">B</label> <input type="checkbox" th:field="*{altMove2}" th:errorclass="fieldError" />
           	</div>
           	<div>
-          	  <label for="color">Colors:</label>
+          	  <label for="color">Colors</label>
           	  <input type="text" th:field="*{color}" size="20" th:errorclass="fieldError" />
           	</div>
-            <div>
-                <label for="emblem1">Emblems</label>
-                <input type="text" th:field="*{emblem1}" size="2" />
-                <input type="text" th:field="*{emblem2}" size="2" />
-            </div>
             <div th:unless="${advanced}">
                 <label for="equip">P1 Equipment</label>
                 <table>
@@ -151,6 +146,24 @@
             <div th:if="${advanced}">
                 <label for="equip">Raw Equipment</label>
                 <input type="text" th:field="*{equip}" size="16" /> (Experts only)
+            </div>
+            <div>
+                <label for="emblem1">Emblem</label>
+                <table>
+	                <tr>
+	                  <td>
+		                <input type="text" th:field="*{emblem1}" size="2" />
+		              </td>
+		              <td>
+		                <input type="text" th:field="*{emblem2}" size="2" />
+		              </td>
+		            </tr>
+		            <tr>
+		              <td>
+		                <img th:src="@{${'/images/emblems/' + player.emblem1 + '.png'}}" src="/images/items/nopic.gif" width="64" height="64" />
+		              </td>
+		            </tr>
+		        </table>
             </div>
             <div th:unless="${param.message == null}">
 	          	<span th:text="${param.message}">changes saved</span>

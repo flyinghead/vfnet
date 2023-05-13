@@ -84,11 +84,11 @@ public class VF4NetUpload extends BaseVf4Servlet
 	{
 		StringBuilder emblems = new StringBuilder();
 		if (player.getEmblem1() != 0)
-			emblems.append(player.getEmblem1());
+			emblems.append(Integer.toHexString(player.getEmblem1()));
 		if (player.getEmblem2() != 0) {
 			if (emblems.length() > 0)
 				emblems.append(',');
-			emblems.append(player.getEmblem2());
+			emblems.append(Integer.toHexString(player.getEmblem2()));
 		}
 		if (emblems.length() > 0)
 			params.put(QueryParams.playerQName(playerNum, "emblem"), emblems.toString());

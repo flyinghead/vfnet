@@ -123,7 +123,7 @@ public class PlayerController implements ServletContextAware {
 		if (!encoder.canEncode(player.getPresentation()))
 			bindingResult.addError(new FieldError("player", "presentation", player.getPresentation(), false, null, null,
 					"Invalid character in presentation"));
-	    System.out.println("Saving player " + player);
+	    //System.out.println("Saving player " + player);
 	    Player persistedPlayer = dbService.getPlayer(player.getCardId());
 	    if (persistedPlayer == null)
 			throw new RuntimeException("Player not found");
