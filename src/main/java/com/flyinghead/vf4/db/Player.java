@@ -439,4 +439,129 @@ public class Player
 	public void setPresentation(String presentation) {
 		this.presentation = presentation;
 	}
+	
+	private int getColor(int playerNum, int index) {
+		if (color == null)
+			return 0;
+		String[] colors = color.split(",");
+		if (index < 4)
+			// body parts
+			index = playerNum * 4 + index;
+		else
+			// hair, eyes
+			index = 4 + playerNum * 2 + index;
+		if (index >= colors.length)
+			return 0;
+		else
+			return Integer.parseInt(colors[index]);
+	}
+	
+	private void setColor(int playerNum, int index, int value) {
+		if (color == null || color.isBlank())
+			color = "0,0,0,0,0,0,0,0,0,0,0,0";
+		String[] colors = color.split(",");
+		if (index < 4)
+			// body parts
+			colors[playerNum * 4 + index] = Integer.toString(value);
+		else
+			// hair, eyes
+			colors[4 + playerNum * 2 + index] = Integer.toString(value);
+		color = String.join(",", colors);
+	}
+
+	public int getP1Color0() {
+		return getColor(0, 0);
+	}
+
+	public void setP1Color0(int v) {
+		setColor(0, 0, v);
+	}
+
+	public int getP1Color1() {
+		return getColor(0, 1);
+	}
+
+	public void setP1Color1(int v) {
+		setColor(0, 1, v);
+	}
+
+	public int getP1Color2() {
+		return getColor(0, 2);
+	}
+
+	public void setP1Color2(int v) {
+		setColor(0, 2, v);
+	}
+
+	public int getP1Color3() {
+		return getColor(0, 3);
+	}
+
+	public void setP1Color3(int v) {
+		setColor(0, 3, v);
+	}
+
+	public int getP1Color4() {
+		return getColor(0, 4);
+	}
+
+	public void setP1Color4(int v) {
+		setColor(0, 4, v);
+	}
+
+	public int getP1Color5() {
+		return getColor(0, 5);
+	}
+
+	public void setP1Color5(int v) {
+		setColor(0, 5, v);
+	}
+
+	public int getP2Color0() {
+		return getColor(1, 0);
+	}
+
+	public void setP2Color0(int v) {
+		setColor(1, 0, v);
+	}
+
+	public int getP2Color1() {
+		return getColor(1, 1);
+	}
+
+	public void setP2Color1(int v) {
+		setColor(1, 1, v);
+	}
+
+	public int getP2Color2() {
+		return getColor(1, 2);
+	}
+
+	public void setP2Color2(int v) {
+		setColor(1, 2, v);
+	}
+
+	public int getP2Color3() {
+		return getColor(1, 3);
+	}
+
+	public void setP2Color3(int v) {
+		setColor(1, 3, v);
+	}
+
+	public int getP2Color4() {
+		return getColor(1, 4);
+	}
+
+	public void setP2Color4(int v) {
+		setColor(1, 4, v);
+	}
+
+	public int getP2Color5() {
+		return getColor(1, 5);
+	}
+
+	public void setP2Color5(int v) {
+		setColor(1, 5, v);
+	}
 }

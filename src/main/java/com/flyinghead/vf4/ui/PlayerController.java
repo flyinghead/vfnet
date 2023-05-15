@@ -71,6 +71,11 @@ public class PlayerController implements ServletContextAware {
 	public Items getItems() {
 		return new Items();
 	}
+
+	@ModelAttribute
+	public Colors getColors() {
+		return new Colors();
+	}
 	
 	@ModelAttribute
 	public ItemImageResolver getImgResolver() {
@@ -129,6 +134,7 @@ public class PlayerController implements ServletContextAware {
 			throw new RuntimeException("Player not found");
 	    if (player.getColor() != null && !player.getColor().isEmpty())
 	    {
+	    	/* FIXME always 12 colors now
 		    if (persistedPlayer.getGameId() == Player.VF4_VANILLA) {
 		    	// 0,0,0,0,0,0,0,0
 		    	Matcher matcher = VANILLA_COLOR.matcher(player.getColor());
@@ -137,12 +143,13 @@ public class PlayerController implements ServletContextAware {
 		    				"Invalid colors: 8 numbers separated by comma"));
 		    }
 		    else {
+		    */
 		    	// 0,0,0,0,0,0,0,0,0,0,0,0
 		    	Matcher matcher = EVO_COLOR.matcher(player.getColor());
 		    	if (!matcher.find())
 		    		bindingResult.addError(new FieldError("player", "color", player.getColor(), false, null, null, 
 		    				"Invalid colors: 12 numbers separated by comma"));
-		    }
+		    // }
 	    }
 	    if (player.getEquip() != null && !player.getEquip().isEmpty()) {
 	    	// TODO vanilla format is different

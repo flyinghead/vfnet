@@ -55,8 +55,98 @@
           	  <label for="altMove1">A</label> <input type="checkbox" th:field="*{altMove1}" th:errorclass="fieldError" />
           	  <label for="altMove1">B</label> <input type="checkbox" th:field="*{altMove2}" th:errorclass="fieldError" />
           	</div>
-          	<div>
-          	  <label for="color">Colors</label>
+          	<div th:unless="${advanced}">
+				<label for="colors">P1 Colors</label>
+                <table>
+                  <tr>
+                    <th th:text="${colors.getColorItem(player.character, 0, 0)}">Shirt</th>
+                    <th th:text="${colors.getColorItem(player.character, 0, 1)}">Pants</th>
+                    <th th:text="${colors.getColorItem(player.character, 0, 2)}">Socks</th>
+                    <th th:text="${colors.getColorItem(player.character, 0, 3)}">Shoes</th>
+                    <th th:if="${player.gameId != 0}">Hair</th>
+                    <th th:if="${player.gameId != 0}">Eyes</th>
+                  </tr>
+                  <tr>
+                    <td>
+	                  <select th:field="*{p1Color0}">
+	                    <option th:each="color,iter : ${colors.getPalette(player.character, 0)}" th:text="${color}" th:value="${iter.index}">Red</option>
+	                  </select>
+	                </td>
+                    <td>
+	                  <select th:field="*{p1Color1}">
+	                    <option th:each="color,iter : ${colors.getPalette(player.character, 0)}" th:text="${color}" th:value="${iter.index}">Green</option>
+	                  </select>
+	                </td>
+                    <td>
+	                  <select th:field="*{p1Color2}">
+	                    <option th:each="color,iter : ${colors.getPalette(player.character, 0)}" th:text="${color}" th:value="${iter.index}">Blue</option>
+	                  </select>
+	                </td>
+                    <td>
+	                  <select th:field="*{p1Color3}">
+	                    <option th:each="color,iter : ${colors.getPalette(player.character, 0)}" th:text="${color}" th:value="${iter.index}">Default</option>
+	                  </select>
+	                </td>
+                    <td th:if="${player.gameId != 0}">
+	                  <select th:field="*{p1Color4}">
+	                    <option th:each="color,iter : ${colors.getHairPalette(player.character)}" th:text="${color}" th:value="${iter.index}">Blonde</option>
+	                  </select>
+	                </td>
+                    <td th:if="${player.gameId != 0}">
+	                  <select th:field="*{p1Color5}">
+	                    <option th:each="color,iter : ${colors.getHairPalette(player.character)}" th:text="${color}" th:value="${iter.index}">Red</option>
+	                  </select>
+	                </td>
+	              </tr>
+	            </table>
+          	</div>
+          	<div th:unless="${advanced}">
+				<label for="colors">P2 Colors</label>
+                <table>
+                  <tr>
+                    <th th:text="${colors.getColorItem(player.character, 1, 0)}">Shirt</th>
+                    <th th:text="${colors.getColorItem(player.character, 1, 1)}">Pants</th>
+                    <th th:text="${colors.getColorItem(player.character, 1, 2)}">Socks</th>
+                    <th th:text="${colors.getColorItem(player.character, 1, 3)}">Shoes</th>
+                    <th th:if="${player.gameId != 0}">Hair</th>
+                    <th th:if="${player.gameId != 0}">Eyes</th>
+                  </tr>
+                  <tr>
+                    <td>
+	                  <select th:field="*{p2Color0}">
+	                    <option th:each="color,iter : ${colors.getPalette(player.character, 1)}" th:text="${color}" th:value="${iter.index}">Red</option>
+	                  </select>
+	                </td>
+                    <td>
+	                  <select th:field="*{p2Color1}">
+	                    <option th:each="color,iter : ${colors.getPalette(player.character, 1)}" th:text="${color}" th:value="${iter.index}">Green</option>
+	                  </select>
+	                </td>
+                    <td>
+	                  <select th:field="*{p2Color2}">
+	                    <option th:each="color,iter : ${colors.getPalette(player.character, 1)}" th:text="${color}" th:value="${iter.index}">Blue</option>
+	                  </select>
+	                </td>
+                    <td>
+	                  <select th:field="*{p2Color3}">
+	                    <option th:each="color,iter : ${colors.getPalette(player.character, 1)}" th:text="${color}" th:value="${iter.index}">Default</option>
+	                  </select>
+	                </td>
+                    <td th:if="${player.gameId != 0}">
+	                  <select th:field="*{p2Color4}">
+	                    <option th:each="color,iter : ${colors.getHairPalette(player.character)}" th:text="${color}" th:value="${iter.index}">Blonde</option>
+	                  </select>
+	                </td>
+                    <td th:if="${player.gameId != 0}">
+	                  <select th:field="*{p2Color5}">
+	                    <option th:each="color,iter : ${colors.getHairPalette(player.character)}" th:text="${color}" th:value="${iter.index}">Red</option>
+	                  </select>
+	                </td>
+	              </tr>
+	            </table>
+          	</div>
+          	<div th:if="${advanced}">
+          	  <label for="color">Raw Colors</label>
           	  <input type="text" th:field="*{color}" size="20" th:errorclass="fieldError" />
           	</div>
             <div th:unless="${advanced}">
