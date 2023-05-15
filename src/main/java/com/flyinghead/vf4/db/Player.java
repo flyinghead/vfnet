@@ -452,8 +452,13 @@ public class Player
 			index = 4 + playerNum * 2 + index;
 		if (index >= colors.length)
 			return 0;
-		else
-			return Integer.parseInt(colors[index]);
+		else {
+			try {
+				return Integer.parseInt(colors[index]);
+			} catch (NumberFormatException e) {
+				return 0;
+			}
+		}
 	}
 	
 	private void setColor(int playerNum, int index, int value) {
