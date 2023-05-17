@@ -85,7 +85,7 @@ public class Colors {
 		};
 		HairColors[3] = new String[] { "Default", "Black", "Brown" };
 		// shun P2
-		CharItems[7] = new String[] { "Pants", "Shirt", "Shoes", "Belt", "Hair", "Eye" };
+		CharItems[7] = new String[] { "Pants", "Shirt", "Shoes", "Belt" };
 		CharColors[7] = new String[] {
 			"Default", "Brown", "Violet", "Green", "Violet", "Light Blue", "Dark Brown", "Cream",
 			"Dark Blue", "Red", "Orange", "Silver", "Gold", "White", "Black",
@@ -94,7 +94,7 @@ public class Colors {
 		
 		// jeffry
 		CharItems[8] = new String[] { "Belt", "Gloves", "Pants", "Foot guards" };
-		CharItems[9] = new String[] { "Belt", "Bracers", "Shorts", "Belt", "Hair", "Eye" };
+		CharItems[9] = new String[] { "Belt", "Bracers", "Shorts", "Belt" };
 		CharColors[8] = new String[] {
 			"Default", "Light Blue", "Violet", "Yellow", "Green", "Red", "Dark Blue", "Light Gray",
 			"Tan", "Brown", "Black", "Silver", "Gold", "Orange", "Pink", "Grey",
@@ -131,10 +131,12 @@ public class Colors {
 		CharColors[13] = CharColors[12];
 		
 		// kage
-		CharItems[14] = new String[] { "1?", "2?", "3?", "4?" };
-		CharItems[15] = CharItems[14];
+		CharItems[14] = new String[] { "Head cloth", "Shirt", "Belt", "Pants" };
+		CharItems[15] = new String[] { "Helmet & armor", "Shirt", "Upper pants", "Lower pants" };
 		CharColors[14] = new String[] {
-			"Default", // TODO
+			"Default", "Red", "Yellow", "Dark Yellow", "Dark Violet", "Dark Green", "Black", "Brown",
+			"Green", "Gray", "Matte Black", "Silver", "Gold", "Orange", "White", "Pink",
+			"Hot Pink", "Dark Orange", "Plain Yellow"
 		};
 		HairColors[7] = new String[] { "Default", "1?", "2?" };
 		CharColors[15] = CharColors[14];
@@ -173,7 +175,7 @@ public class Colors {
 		CharColors[21] = CharColors[20];
 		
 		// lei-fei
-		CharItems[22] = new String[] { "1?", "2?", "3?", "4?", "Hair", "Eye" };
+		CharItems[22] = new String[] { "1?", "2?", "3?", "4?" };
 		CharItems[23] = CharItems[22];
 		CharColors[22] = new String[] {
 			"Default", // TODO

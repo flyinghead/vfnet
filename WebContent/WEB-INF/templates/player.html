@@ -237,8 +237,199 @@
                 <label for="equip">Raw Equipment</label>
                 <input type="text" th:field="*{equip}" size="16" /> (Experts only)
             </div>
-            <div>
+            <div th:unless="${advanced}">
                 <label for="emblem1">Emblem</label>
+                <table>
+	                <tr>
+	                  <td>
+		                <select th:field="*{emblem1}">
+		                	<option value="0"></option>
+		                	<option value="1">A</option>
+		                	<option value="2">B</option>
+		                	<option value="3">C</option>
+		                	<option value="4">D</option>
+		                	<option value="5">E</option>
+		                	<option value="6">F</option>
+		                	<option value="7">G</option>
+		                	<option value="8">H</option>
+		                	<option value="9">I</option>
+		                	<option value="10">J</option>
+		                	<option value="11">K</option>
+		                	<option value="12">L</option>
+		                	<option value="13">M</option>
+		                	<option value="14">N</option>
+		                	<option value="15">O</option>
+		                	<option value="16">P</option>
+		                	<option value="17">Q</option>
+		                	<option value="18">R</option>
+		                	<option value="19">S</option>
+		                	<option value="20">T</option>
+		                	<option value="21">U</option>
+		                	<option value="22">V</option>
+		                	<option value="23">W</option>
+		                	<option value="24">X</option>
+		                	<option value="25">Y</option>
+		                	<option value="26">Z</option>
+		                	<option value="27">Alpha</option>
+		                	<option value="28">Beta</option>
+		                	<option value="29">Gamma</option>
+		                	<option value="30">A in a drop</option>
+		                	<option value="31">Cobra</option>
+		                	<option value="32">Wolf</option>
+		                	<option value="33">Scorpion</option>
+		                	<option value="34">Eagle</option>
+		                	<option value="35">Bat</option>
+		                	<option value="36">Polar bear</option>
+		                	<option value="37">Pink tile</option>
+		                	<option value="38">Green tile/option>
+		                	<option value="39">Purple tile</option>
+		                	<option value="40">Wavy tile</option>
+		                	<option value="41">Blue tile</option>
+		                	<option value="42">Net tile</option>
+		                	<option value="43">Coat of arms 1</option>
+		                	<option value="44">Coat of arms 2</option>
+		                	<option value="45">Coat of arms 3</option>
+		                	<option value="46">Coat of arms 4</option>
+		                	<option value="47">Coat of arms 5</option>
+		                	<option value="48">Coat of arms 6</option>
+		                	<option value="49">Mouse head</option>
+		                	<option value="50">Bull head</option>
+		                	<option value="51">Tiger head</option>
+		                	<option value="52">Rabbit head</option>
+		                	<option value="53">Lion demon</option>
+		                	<option value="54">Snake head</option>
+		                	<option value="55">Horse head</option>
+		                	<option value="56">Ram head</option>
+		                	<option value="57">Monkey head</option>
+		                	<option value="58">Rooster head</option>
+		                	<option value="59">Cat head</option>
+		                	<option value="60">Hog head</option>
+		                	<option value="61">Candies</option>
+		                	<option value="62">Tea</option>
+		                	<option value="63">Shell</option>
+		                	<option value="64">Sushis</option>
+		                	<option value="65">Coffee mug</option>
+		                	<option value="66">Food bowl</option>
+		                	<option value="67">Tou kanji 投</option>
+		                	<option value="68">Mukai kanji 迎</option>
+		                	<option value="69">Hame katakana ハメ</option>
+		                	<option value="70">Mori/Mamoru kanji 守</option>
+		                	<option value="71">Osamu kanji 攻</option>
+		                	<option value="72">Machi kanji 待</option>
+		                	<option value="73">Take kanji 武</option>
+		                	<option value="74">Tou kanji 闘</option>
+		                	<option value="75">Ken kanji 拳</option>
+		                	<option value="76">Geki kanji 撃</option>
+		                	<option value="77">Kai kanji 壊</option>
+		                	<option value="78">Shou kanji 勝</option>
+		                	<option value="79">Dragon</option>
+		                	<option value="80">Kappa</option>
+		                	<option value="81">Vampire</option>
+		                	<option value="82">Cyclop scientist</option>
+		                	<option value="83">Blue flame</option>
+		                	<option value="84">Frankenstein</option>
+		                	<option value="85">Crest</option>
+		                	<option value="86">Heart with fire</option>
+		                	<option value="87">Girl with glasses</option>
+		                	<option value="88">Fortune cat</option>
+		                	<option value="89">Cupid</option>
+		                	<option value="90">Devil</option>
+		                	<option value="91">Sonic</option>
+		                	<option value="92">Opa-Opa</option>
+		                	<option value="93">Alex Kidd</option>
+		                	<option value="94">Nights</option>
+		                	<option value="95">Sega 1</option>
+		                	<option value="96">Professor Asobin</option>
+		                	<option value="97">Amigo</option>
+		                	<option value="98">Myau</option>
+		                	<option value="99">Nei</option>
+		                	<option value="100">Tails</option>
+		                	<option value="101">Sega 2</option>
+		                	<option value="102">Pengo</option>
+		                	<option value="103">Sega 3</option>
+		                	<option value="104">Yellow Morolian</option>
+		                	<option value="105">Ulala</option>
+		                	<option value="106">Altered Beast</option>
+		                	<option value="107">Space Harrier</option>
+		                	<option value="108">Gilius Thunderhead</option>
+		                	<option value="109">Ling Shenhua</option>
+		                	<option value="110">Volleyball</option>
+		                	<option value="111">Bahn</option>
+		                	<option value="112">Candy/Honey</option>
+		                	<option value="113">Ryo Hazuki</option>
+		                	<option value="114">AM2 logo</option>
+		                	<option value="115">Sun</option>
+		                	<option value="116">Moon</option>
+		                	<option value="117">Rainbow star</option>
+		                	<option value="118">Earth</option>
+		                	<option value="119">UFO</option>
+		                	<option value="120">Alien</option>
+		                	<option value="121">Kagami mochi</option>
+		                	<option value="122">Chocolate heart</option>
+		                	<option value="123">Fortune teller</option>
+		                	<option value="124">Sakura flower</option>
+		                	<option value="125">Koinobori</option>
+		                	<option value="126">Snail</option>
+		                	<option value="127">Cicada</option>
+		                	<option value="128">Watermelon</option>
+		                	<option value="129">Stockpiled dango</option>
+		                	<option value="130">Maple leaf</option>
+		                	<option value="131">Snowman</option>
+		                	<option value="132">Santa</option>
+		                	<option value="133">Aries</option>
+		                	<option value="134">Taurus</option>
+		                	<option value="135">Gemini</option>
+		                	<option value="136">Cancer</option>
+		                	<option value="137">Leo</option>
+		                	<option value="138">Virgo</option>
+		                	<option value="139">Libra</option>
+		                	<option value="140">Scorpius</option>
+		                	<option value="141">Sagittarius</option>
+		                	<option value="142">Capricornus</option>
+		                	<option value="143">Aquarius</option>
+		                	<option value="144">Pisces</option>
+		                	<option value="145">Hokkaido region</option>
+		                	<option value="146">Touhoku region</option>
+		                	<option value="147">Kanto region</option>
+		                	<option value="148">Tokyo area</option>
+		                	<option value="149">Hokuriku region</option>
+		                	<option value="150">Chubu region</option>
+		                	<option value="151">Osaka area</option>
+		                	<option value="152">Kansai/Kinki region</option>
+		                	<option value="153">Chugoku region</option>
+		                	<option value="154">Shikoku region</option>
+		                	<option value="155">Kyushu region</option>
+		                	<option value="156">Okinawa region</option>
+		                	<option value="157">Akira</option>
+		                	<option value="158">Kage</option>
+		                	<option value="159">Jacky</option>
+		                	<option value="160">Sarah</option>
+		                	<option value="161">Lau</option>
+		                	<option value="162">Pai</option>
+		                	<option value="163">Wolf</option>
+		                	<option value="164">Jeffry</option>
+		                	<option value="165">Shun</option>
+		                	<option value="166">Lion</option>
+		                	<option value="167">Aoi</option>
+		                	<option value="168">Lei-fei</option>
+		                	<option value="169">Vanessa</option>
+		                	<option value="170">Goh</option>
+		                	<option value="171">Brad</option>
+		                	<option value="172">Dural</option>
+		                	<option value="173">T-Arashi</option>
+		                	<option value="174">Siba (Majid)</option>
+		                </select>
+		              </td>
+		            </tr>
+		            <tr>
+		              <td>
+		                <img th:src="@{${'/images/emblems/' + player.emblem1 + '.png'}}" src="/images/items/nopic.gif" width="64" height="64" />
+		              </td>
+		            </tr>
+		        </table>
+            </div>
+            <div th:if="${advanced}">
+                <label for="emblem1">Raw Emblems</label>
                 <table>
 	                <tr>
 	                  <td>
@@ -299,7 +490,7 @@
       </table>
     </div>
     <div class="footer">
-    	Source: Virtua Fighter 4 Evolution Complete Guide and virtuafighter.com<br>
+    	Source: Virtua Fighter 4 Evolution Complete Guide, virtuafighter.com and the VF discord community<br>
     	Virtua Fighter and all related material © SEGA
     </div>
 </body>
