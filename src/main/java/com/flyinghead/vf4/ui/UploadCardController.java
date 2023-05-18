@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.flyinghead.vf4.VanillaAccessCode;
 import com.flyinghead.vf4.db.IDbService;
 
 @Controller
@@ -45,12 +46,23 @@ public class UploadCardController {
 			byte[] bytes = card.getBytes();
 			if (bytes.length != 128)
 				throw new RuntimeException("Invalid card file");
-			if (bytes[37] == 0 && bytes[38] == 0)
-				throw new RuntimeException("VF4 vanilla cards not supported yet");
-			// card id is at offset 39 for ft and evo
-			int cardId = (bytes[39] & 0xff) | ((bytes[40] & 0xff) << 8) | ((bytes[41] & 0xff) << 16);
-			if (cardId == 0)
-				throw new RuntimeException("Unregistered card");
+			int cardId;
+			if (bytes[37] == 0 && bytes[38] == 0) {
+				// Vanilla
+				// card id is made from big-endian int at offset 4 for vanilla
+				String cardIdStr = VanillaAccessCode.makeCode(((bytes[4] & 0xff) << 24) | ((bytes[5] & 0xff) << 16) | ((bytes[6] & 0xff) << 8) | (bytes[7] & 0xff));
+				if (cardIdStr == null)
+					throw new RuntimeException("Internal error");
+				cardId = Integer.parseInt(cardIdStr);
+			}
+			else
+			{
+				// Evo, FT
+				// card id is at offset 39 for ft and evo
+				cardId = (bytes[39] & 0xff) | ((bytes[40] & 0xff) << 8) | ((bytes[41] & 0xff) << 16);
+				if (cardId == 0)
+					throw new RuntimeException("Unregistered card");
+			}
 			if (dbService.getPlayer(cardId) == null)
 				throw new RuntimeException("Player not found");
 			return "redirect:player?id=" + String.valueOf(cardId);

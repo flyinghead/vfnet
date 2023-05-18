@@ -42,7 +42,7 @@ import com.flyinghead.vf4.db.Player;
 @Controller
 public class PlayerController implements ServletContextAware {
 	private static final Pattern HEXADECIMAL_PATTERN = Pattern.compile("\\p{XDigit}+");
-	private static final Pattern VANILLA_COLOR = Pattern.compile("^\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d$", 0);
+	//private static final Pattern VANILLA_COLOR = Pattern.compile("^\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d$", 0);
 	private static final Pattern EVO_COLOR = Pattern.compile("^\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d$", 0);
 
 	public static class ItemImageResolver {
@@ -113,21 +113,23 @@ public class PlayerController implements ServletContextAware {
 			bindingResult.addError(new FieldError("player", "clanName", player.getClanName(), false, null, null,
 					"Invalid character in clan name"));
 		encoder.reset();
-		String[] lines = player.getPresentation().split("\r\n");
-		if (lines.length > 3)
-			bindingResult.addError(new FieldError("player", "presentation", player.getPresentation(), false, null, null,
-					"Presentation max 3 lines"));
-		else {
-			for (String line : lines)
-				if (line.length() > 30) {
-					bindingResult.addError(new FieldError("player", "presentation", player.getPresentation(), false, null, null,
-							"Presentation max 30 characters per line"));
-					break;
-				}
+		if (player.getPresentation() != null) {
+			String[] lines = player.getPresentation().split("\r\n");
+			if (lines.length > 3)
+				bindingResult.addError(new FieldError("player", "presentation", player.getPresentation(), false, null, null,
+						"Presentation max 3 lines"));
+			else {
+				for (String line : lines)
+					if (line.length() > 30) {
+						bindingResult.addError(new FieldError("player", "presentation", player.getPresentation(), false, null, null,
+								"Presentation max 30 characters per line"));
+						break;
+					}
+			}
+			if (!encoder.canEncode(player.getPresentation()))
+				bindingResult.addError(new FieldError("player", "presentation", player.getPresentation(), false, null, null,
+						"Invalid character in presentation"));
 		}
-		if (!encoder.canEncode(player.getPresentation()))
-			bindingResult.addError(new FieldError("player", "presentation", player.getPresentation(), false, null, null,
-					"Invalid character in presentation"));
 	    //System.out.println("Saving player " + player);
 	    Player persistedPlayer = dbService.getPlayer(player.getCardId());
 	    if (persistedPlayer == null)

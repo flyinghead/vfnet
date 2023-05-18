@@ -58,7 +58,7 @@ public class Colors {
 			"Red", "White", "Black", "Silver", "Gold", "Light Green", "Brown",
 			"Dark Green", "Dark Red", "Grey", "Bright Yellow", "Blue"
 		};
-		HairColors[1] = new String[] { "Default", "Red", "Orange" };
+		HairColors[1] = new String[] { "Default", "Red / Purple", "Orange / Green" };
 		// sarah P2
 		CharItems[3] = new String[] { "Shirt", "Pants", "Jewelry", "Shoes & belt" };
 		CharColors[3] = Arrays.copyOf(CharColors[2], CharColors[2].length);
