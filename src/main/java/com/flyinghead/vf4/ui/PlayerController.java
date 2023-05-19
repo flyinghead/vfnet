@@ -42,8 +42,7 @@ import com.flyinghead.vf4.db.Player;
 @Controller
 public class PlayerController implements ServletContextAware {
 	private static final Pattern HEXADECIMAL_PATTERN = Pattern.compile("\\p{XDigit}+");
-	//private static final Pattern VANILLA_COLOR = Pattern.compile("^\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d$", 0);
-	private static final Pattern EVO_COLOR = Pattern.compile("^\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d$", 0);
+	private static final Pattern COLOR_PATTERN = Pattern.compile("^\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d,\\d?\\d$", 0);
 
 	public static class ItemImageResolver {
 		private ServletContext context;
@@ -106,13 +105,16 @@ public class PlayerController implements ServletContextAware {
 			bindingResult.addError(new FieldError("player", "ringName", player.getRingName(), false, null, null,
 					"Invalid character in ring name"));
 		encoder.reset();
-		if (player.getClanName().length() > 20)
-			bindingResult.addError(new FieldError("player", "clanName", player.getClanName(), false, null, null,
-					"Clan is too long"));
-		if (!encoder.canEncode(player.getClanName()))
-			bindingResult.addError(new FieldError("player", "clanName", player.getClanName(), false, null, null,
-					"Invalid character in clan name"));
-		encoder.reset();
+		if (player.getClanName() != null)
+		{
+			if (player.getClanName().length() > 20)
+				bindingResult.addError(new FieldError("player", "clanName", player.getClanName(), false, null, null,
+						"Clan is too long"));
+			if (!encoder.canEncode(player.getClanName()))
+				bindingResult.addError(new FieldError("player", "clanName", player.getClanName(), false, null, null,
+						"Invalid character in clan name"));
+			encoder.reset();
+		}
 		if (player.getPresentation() != null) {
 			String[] lines = player.getPresentation().split("\r\n");
 			if (lines.length > 3)
@@ -136,22 +138,12 @@ public class PlayerController implements ServletContextAware {
 			throw new RuntimeException("Player not found");
 	    if (player.getColor() != null && !player.getColor().isEmpty())
 	    {
-	    	/* FIXME always 12 colors now
-		    if (persistedPlayer.getGameId() == Player.VF4_VANILLA) {
-		    	// 0,0,0,0,0,0,0,0
-		    	Matcher matcher = VANILLA_COLOR.matcher(player.getColor());
-		    	if (!matcher.find())
-		    		bindingResult.addError(new FieldError("player", "color", player.getColor(), false, null, null,
-		    				"Invalid colors: 8 numbers separated by comma"));
-		    }
-		    else {
-		    */
-		    	// 0,0,0,0,0,0,0,0,0,0,0,0
-		    	Matcher matcher = EVO_COLOR.matcher(player.getColor());
-		    	if (!matcher.find())
-		    		bindingResult.addError(new FieldError("player", "color", player.getColor(), false, null, null, 
-		    				"Invalid colors: 12 numbers separated by comma"));
-		    // }
+	    	// We force 12 colors but vanilla only uses the first 8
+	    	// 0,0,0,0,0,0,0,0,0,0,0,0
+	    	Matcher matcher = COLOR_PATTERN.matcher(player.getColor());
+	    	if (!matcher.find())
+	    		bindingResult.addError(new FieldError("player", "color", player.getColor(), false, null, null, 
+	    				"Invalid colors: 12 numbers separated by comma"));
 	    }
 	    if (player.getEquip() != null && !player.getEquip().isEmpty()) {
 	    	// TODO vanilla format is different

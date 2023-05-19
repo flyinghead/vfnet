@@ -42,7 +42,7 @@
           	  <label for="ringName">Ring Name</label>
           	  <input type="text" th:field="*{ringName}" size="20" th:errorclass="fieldError" />
           	</div>
-          	<div>
+          	<div th:if="${player.gameId != 0}">
           	  <label for="clanName">Clan Name</label>
           	  <input type="text" th:field="*{clanName}" size="20" th:errorclass="fieldError" />
           	</div>

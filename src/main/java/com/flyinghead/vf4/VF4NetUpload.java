@@ -145,8 +145,6 @@ public class VF4NetUpload extends BaseVf4Servlet
 	private Map<String, String> doSelect(HttpServletRequest req, QueryParams params)
 	{
 		// cmd=select&access_code_1p=4240965643711192&card_id_1p=0
-		//sb.append("color_1p=1,1,1,0,0,0,0,0,0,0,0,0&equip_1p=0000000000020100&sv_item_1p=2,4,5&emblem_1p=1&tec_1p=1,0&ring_name_1p=Flyinghead");
-		//sb.append("&color_2p=3,2,1,0,0,0,0,0,0,0,0,0&equip_2p=0000000000020100&sv_item_2p=2,4,5&emblem_2p=1&tec_2p=1,0&ring_name_2p=Flyinghead2&db_stat=1");
 		Map<String, String> outParams = new HashMap<>();
 		int gameType = getGameTypeFromUA(req);
 		String[] accessCodes = getAccessCodes(gameType, params);
@@ -212,11 +210,8 @@ public class VF4NetUpload extends BaseVf4Servlet
 		{
 			if (accessCodes[i] != null && !accessCodes[i].isEmpty())
 			{
-				if (gameType == Player.VF4_VANILLA) {
-					if ("4240965643711192".equals(accessCodes[i]))
-						accessCodes[i] = "4403393343571863";
+				if (gameType == Player.VF4_VANILLA)
 					outParams.put(QueryParams.playerQName(i, "id"), accessCodes[i]);
-				}
 				else
 					outParams.put(QueryParams.playerQName(i, "access_code"), accessCodes[i]);
 
@@ -367,10 +362,6 @@ public class VF4NetUpload extends BaseVf4Servlet
 			match.setLooseCharacter(params.playerGetInt(1 - winner, "char", -1) % 100);
 			dbService.saveMatch(match);
 		}
-		//if (!accessCode1.isEmpty())
-		//	sb.append("&access_code_1p=").append(accessCode1);
-		//if (!accessCode2.isEmpty())
-		//	sb.append("&access_code_2p=").append(accessCode2);
 
 		return outParams;
 	}
@@ -384,6 +375,16 @@ public class VF4NetUpload extends BaseVf4Servlet
 		if (value != null)
 			outParams.put("serial", value);
 		
+		return outParams;
+	}
+	
+	private Map<String, String> doUpdateCard(HttpServletRequest req, QueryParams params) {
+		// cmd=update_card&old_id_1p=%s&id_1p=%s&cnt=%d
+		int oldId = Integer.parseInt(params.get("old_id_1p").substring(9));
+		int newId = Integer.parseInt(params.get("id_1p").substring(9));
+		dbService.updateCardId(oldId, newId);
+		Map<String, String> outParams = new HashMap<>();
+		outParams.put("db_stat", "1");
 		return outParams;
 	}
 
@@ -507,9 +508,9 @@ public class VF4NetUpload extends BaseVf4Servlet
 			outParams = doTest(req, params);
 		else if ("message".equals(cmd))
 			sb.append(doMessage());
-		// TODO vanilla:
-		// cmd=update_card&old_id_1p=%s&id_1p=%s&cnt=%d
-		// advise
+		else if ("update_card".equals(cmd))
+			outParams = doUpdateCard(req, params);
+		// TODO vanilla: advise?
 		else {
 			resp.sendError(500, "Command not implemented: " + cmd);
 			return;
@@ -538,6 +539,5 @@ public class VF4NetUpload extends BaseVf4Servlet
 
 		resp.setHeader("Pragma", "DFI");		// indicates that payload is deflated and base64 encoded
 		resp.getWriter().write(out);
-//		resp.getWriter().write(sb.toString());
 	}
 }

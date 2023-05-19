@@ -93,4 +93,14 @@ public class DbService implements IDbService
 		return list;
 	}
 
+	@Override
+	@Transactional
+	public void updateCardId(int oldId, int newId)
+	{
+		Player player = getPlayer(oldId);
+		if (player == null)
+			return;
+		player.setCardId(newId);
+		sessionFactory.getCurrentSession().merge(player);
+	}
 }

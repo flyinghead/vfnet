@@ -26,4 +26,5 @@ public interface IDbService {
 	void saveMatch(Match match);
 	List<Match> listMatches();
 	List<Match> listPlayerMatches(int cardId);
+	void updateCardId(int oldId, int newId);
 }
