@@ -19,9 +19,11 @@ package com.flyinghead.vf4;
 
 import java.util.Properties;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
@@ -49,7 +51,7 @@ public class Vf4Config {
     @Bean
     public DataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();
-        String dbPassword = System.getProperty("vf4.db.password", null);
+        String dbPassword = readJndi("vf4.db.password");
         if (dbPassword == null) {
 	        // test
 	        dataSource.setDriverClassName("org.h2.Driver");
@@ -76,7 +78,7 @@ public class Vf4Config {
 
     private final Properties hibernateProperties() {
     	Properties hibernateProperties = new Properties();
-    	if (System.getProperty("vf4.db.password", null) == null) {
+    	if (readJndi("vf4.db.password") == null) {
     		// test
     		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
     		hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
@@ -90,4 +92,14 @@ public class Vf4Config {
         return hibernateProperties;
     }
 
+    private String readJndi(String paramName) {
+    	Object jndiValue = null;
+    	try {
+    		final InitialContext ic = new InitialContext();
+    	    jndiValue = ic.lookup("java:comp/env/" + paramName);
+    	} catch (NamingException e) {
+    		e.printStackTrace();
+    	}
+    	return jndiValue != null ? jndiValue.toString() : null;
+    }
 }
