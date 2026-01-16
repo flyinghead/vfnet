@@ -45,6 +45,8 @@ public class ServerStatus implements InitializingBean, Runnable {
 			Properties props = new Properties();
 			props.load(new FileInputStream("/usr/local/etc/dcnet/status.conf"));
 			statusUrl = props.getProperty("status-url", null);
+			if (statusUrl != null)
+				statusUrl += "/vf4";
 			String update = props.getProperty("update-interval", "300");
 			updateInterval = Integer.parseInt(update);
 		} catch (NumberFormatException e) {
