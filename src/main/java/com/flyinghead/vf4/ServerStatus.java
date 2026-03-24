@@ -18,6 +18,7 @@
 package com.flyinghead.vf4;
 
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -37,6 +38,7 @@ public class ServerStatus implements InitializingBean, Runnable {
 	private Thread thread = null;
 	private long updateInterval = 300;
 	private String statusUrl = null;
+	private File statusDir = null;
 
 	@Override
 	public void afterPropertiesSet() throws Exception
@@ -49,6 +51,7 @@ public class ServerStatus implements InitializingBean, Runnable {
 				statusUrl += "/vf4";
 			String update = props.getProperty("update-interval", "300");
 			updateInterval = Integer.parseInt(update);
+			statusDir = new File(props.getProperty("status-dir", "/var/local/lib/dcnet/status"));
 		} catch (NumberFormatException e) {
 			updateInterval = 300;
 		} catch (IOException e) {
@@ -67,20 +70,13 @@ public class ServerStatus implements InitializingBean, Runnable {
 			JSONObject status = new JSONObject();
 			status.put("gameId", "vf4");
 			status.put("timestamp", System.currentTimeMillis() / 1000);
-			status.put("playerCount", 0);
-			status.put("gameCount", 0);
 			JSONArray array = new JSONArray();
 			array.put(status);
 			String text = array.toString(4);
 			if (statusUrl == null)
 			{
-				try {
-					OutputStream ostream = new FileOutputStream("/var/lib/dcnet/status/vf4");
-					try {
-						ostream.write(text.getBytes("UTF-8"));
-					} finally {
-						ostream.close();
-					}
+				try (OutputStream ostream = new FileOutputStream(new File(statusDir, "vf4"))) {
+					ostream.write(text.getBytes("UTF-8"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -95,7 +91,7 @@ public class ServerStatus implements InitializingBean, Runnable {
 					break;
 				}
 				try {
-					HttpURLConnection conn= (HttpURLConnection)url.openConnection();
+					HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 					conn.setDoOutput(true);
 					conn.setInstanceFollowRedirects(false);
 					conn.setRequestMethod("POST");
@@ -106,11 +102,12 @@ public class ServerStatus implements InitializingBean, Runnable {
 					conn.setUseCaches(false);
 					try (DataOutputStream wr = new DataOutputStream(conn.getOutputStream())) {
 					   wr.write(postData);
-					   wr.close();
 					}
 					int code = conn.getResponseCode();
 					if (code < 200 || code >= 300)
 						System.out.println("Status HTTP error: " + conn.getResponseCode() + " " + conn.getResponseMessage());
+					conn.getInputStream().close();
+					conn.disconnect();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
